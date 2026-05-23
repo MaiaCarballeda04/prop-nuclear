@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arquitectura NEP: Propulsión Nuclear Eléctrica Escalable</title>
+    <title>Arquitectura NEP: Propulsión Nuclear Eléctrica Genérica - SR-1 Freedom Framework</title>
     
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
 
@@ -54,6 +54,8 @@
         }
 
         .header-text h1 span { color: var(--primary); }
+        .header-text h1 span.project { color: white; } /* "FREEDOM" en blanco */
+
         .header-text p { color: var(--text-muted); font-size: 0.95rem; margin-top: 0.4rem; }
 
         /* Bandera Argentina Aeroespacial */
@@ -92,7 +94,7 @@
             overflow-y: auto;
         }
 
-        /* COLUMNA DERECHA: Documentación y Resultados con Scroll */
+        /* COLUMNA DERECHA: Documentación, Resultados, y Modelo */
         .content-area {
             flex: 1;
             display: flex;
@@ -168,7 +170,7 @@
 
         .tab-content.active { display: block; }
 
-        /* NUEVO DISEÑO DEL ENTORNO 3D DINÁMICO */
+        /* NUEVO DISEÑO DEL ENTORNO 3D DINÁMICO ABAJO DE LOS RESULTADOS */
         .viewer-3d-container {
             background-color: #050811;
             border: 1px solid var(--border);
@@ -341,7 +343,7 @@
     <header>
         <div class="header-text">
             <h1>Arquitectura <span>NEP</span> Genérica Estructural</h1>
-            <p>Marco de Simulación y Validation Física para Sistemas de Propulsión Nuclear Eléctrica de Alta Eficiencia</p>
+            <p>Marco de Simulación y Validación Física para Sistemas de Propulsión Nuclear Eléctrica (Basado en el SR-1 <span class="project">FREEDOM</span> Framework)</p>
         </div>
         <div class="flag-container" title="Desarrollo Tecnológico de Matriz Nacional Argentina">
             <div class="flag-stripe flag-blue"></div>
@@ -418,7 +420,7 @@
                     </div>
                 </div>
 
-                <h2 class="section-title">Visualización de Estructuras 3D (Caso de Estudio: SR-1 Freedom / Dawn NASA)</h2>
+                <h2 class="section-title">Visualización de Estructuras 3D (Caso de Estudio: SR-1 Freedom / Dawn Framework)</h2>
                 <div class="viewer-3d-container" id="viewer-container">
                     <div class="viewer-3d-title" id="viewer-tag">📐 Análisis Geométrico (Orbital 360°)</div>
                     
@@ -428,13 +430,457 @@
 
                     <model-viewer 
                         id="spacecraft-model"
-                        src="https://modelviewer.dev/shared-assets/models/NeilArmstrong.glb" 
-                        alt="Estructura modular adaptativa de simulación" 
+                        src="https://modelviewer.dev/shared-assets/models/Solmap.gltf" 
+                        alt="Estructura modular adaptativa con paneles y radiadores alineados" 
                         auto-rotate 
                         camera-controls 
-                        shadow-intensity="8"
-                        exposure="1"
-                        interaction-prompt="auto">
+                        shadow-intensity="10"
+                        exposure="0.9"
+                        background-color="#050811">
+                    </model-viewer>
+                </div>
+
+                <div class="tech-block">
+                    <h3>Formulación y Primeros Principios Matemáticos```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arquitectura NEP: Propulsión Nuclear Eléctrica Escalable (Basado en el SR-1 FREEDOM Framework)</title>
+    
+    <script type="module" src="[https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js](https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js)"></script>
+
+    <style>
+        :root {
+            --bg-main: #0B0F19;
+            --bg-card: #151D30;
+            --primary: #00F0FF;
+            --secondary: #FF007A;
+            --text-main: #E2E8F0;
+            --text-muted: #94A3B8;
+            --border: #24324F;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --danger: #EF4444;
+            --patrio-blue: #7EE0FB;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        header {
+            background-color: var(--bg-card);
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-text h1 {
+            color: white;
+            font-size: 1.8rem;
+            letter-spacing: 0.5px;
+        }
+
+        .header-text h1 span { color: var(--primary); }
+        .header-text h1 span.project { color: white; } /* "FREEDOM" en blanco */
+
+        .header-text p { color: var(--text-muted); font-size: 0.95rem; margin-top: 0.4rem; }
+
+        /* Bandera Argentina Aeroespacial */
+        .flag-container {
+            display: flex;
+            flex-direction: column;
+            width: 45px;
+            height: 25px;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .flag-stripe { height: 33.33%; }
+        .flag-blue { background-color: #74C4F2; }
+        .flag-white { background-color: #FFFFFF; display: flex; justify-content: center; align-items: center; }
+        .flag-sun { width: 6px; height: 6px; background-color: #F2B705; border-radius: 50%; }
+
+        /* Contenedor Principal en Pantalla Dividida */
+        .main-container {
+            display: flex;
+            flex: 1;
+            height: calc(100vh - 90px);
+            position: relative;
+        }
+
+        /* COLUMNA IZQUIERDA: Panel de Mandos Fijo */
+        .sidebar {
+            width: 380px;
+            background-color: var(--bg-card);
+            border-right: 1px solid var(--border);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            overflow-y: auto;
+        }
+
+        /* COLUMNA DERECHA: Documentación, Resultados, y Modelo */
+        .content-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            background-color: var(--bg-main);
+        }
+
+        .section-title {
+            font-size: 1.1rem;
+            color: white;
+            border-left: 4px solid var(--primary);
+            padding-left: 0.6rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .control-group {
+            background: rgba(11, 15, 25, 0.6);
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        .control-group label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
+        }
+
+        .control-group label span.value { color: var(--primary); font-weight: bold; }
+        .control-group input[type="range"] { width: 100%; accent-color: var(--primary); cursor: pointer; margin-top: 0.3rem; }
+        .control-group select { width: 100%; background-color: var(--bg-main); border: 1px solid var(--border); color: white; padding: 0.5rem; border-radius: 4px; outline: none; cursor: pointer; }
+        .param-note { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem; line-height: 1.3; }
+
+        /* Sistema de Pestañas */
+        .tabs-nav {
+            display: flex;
+            background-color: var(--bg-card);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .tab-btn {
+            flex: 1;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            padding: 1rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+            border-bottom: 2px solid transparent;
+        }
+
+        .tab-btn:hover { color: white; background: rgba(255, 255, 255, 0.02); }
+        .tab-btn.active { color: var(--primary); border-bottom-color: var(--primary); background: rgba(0, 240, 255, 0.04); }
+
+        .tab-content {
+            display: none;
+            padding: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .tab-content.active { display: block; }
+
+        /* NUEVO DISEÑO DEL ENTORNO 3D DINÁMICO ABAJO DE LOS RESULTADOS */
+        .viewer-3d-container {
+            background-color: #050811;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+            position: relative;
+            transition: all 0.3s ease;
+            box-shadow: inset 0 0 30px rgba(0, 240, 255, 0.05);
+        }
+
+        /* Indicador de Falla en el Visor */
+        .viewer-fault-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(239, 68, 68, 0.15);
+            border: 2px solid var(--danger);
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 4;
+            pointer-events: none;
+            box-shadow: inset 0 0 50px rgba(239, 68, 68, 0.4);
+            animation: pulse-border 1.5s infinite ease-in-out;
+        }
+
+        @keyframes pulse-border {
+            0% { opacity: 0.7; }
+            50% { opacity: 1; }
+            100% { opacity: 0.7; }
+        }
+
+        .viewer-fault-badge {
+            background-color: var(--danger);
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            text-transform: uppercase;
+        }
+
+        .viewer-3d-title {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            z-index: 5;
+            background: rgba(21, 29, 48, 0.9);
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            border: 1px solid var(--border);
+            font-size: 0.8rem;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            pointer-events: none;
+        }
+
+        model-viewer {
+            width: 100%;
+            height: 420px;
+            background-color: #050811;
+            --poster-color: transparent;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Tarjetas de Diagnóstico Físico */
+        .grid-outputs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .output-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.2rem;
+            text-align: center;
+        }
+
+        .output-card .label { font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 0.3rem; }
+        .output-card .value { font-size: 1.8rem; font-weight: bold; color: white; }
+        .output-card .unit { font-size: 0.9rem; color: var(--text-muted); margin-left: 0.2rem; }
+
+        /* Bloques de Estado y Validaciones */
+        .status-box {
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .status-box.valid { background-color: rgba(16, 185, 129, 0.15); border: 1px solid var(--success); color: var(--success); }
+        .status-box.warning { background-color: rgba(245, 158, 11, 0.15); border: 1px solid var(--warning); color: var(--warning); }
+        .status-box.invalid { background-color: rgba(239, 68, 68, 0.15); border: 1px solid var(--danger); color: var(--danger); }
+
+        /* Contenido Técnico Estilizado */
+        .tech-block {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-block h3 {
+            color: white;
+            font-size: 1.15rem;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.5rem;
+        }
+
+        .tech-block h3 span.badge {
+            background: rgba(0, 240, 255, 0.1);
+            color: var(--primary);
+            font-size: 0.75rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            text-transform: uppercase;
+        }
+
+        .tech-block p { font-size: 0.95rem; line-height: 1.6; color: var(--text-main); margin-bottom: 1rem; text-align: justify; }
+        .tech-block ul, .tech-block ol { margin-left: 1.5rem; margin-bottom: 1rem; color: var(--text-main); font-size: 0.95rem; }
+        .tech-block li { margin-bottom: 0.5rem; line-height: 1.5; }
+
+        /* Expresiones Matemáticas Estilizadas */
+        .equation-container {
+            background-color: rgba(11, 15, 25, 0.9);
+            border-radius: 6px;
+            border-left: 4px solid var(--secondary);
+            padding: 1.2rem;
+            margin: 1.2rem 0;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+        }
+
+        .equation-box { font-family: 'Times New Roman', Times, serif; font-size: 1.4rem; color: white; text-align: center; font-style: italic; letter-spacing: 1px; margin-bottom: 0.4rem; }
+        .equation-box span.math-op { font-family: 'Segoe UI', sans-serif; font-style: normal; color: var(--primary); }
+        .eq-expl { font-size: 0.85rem; color: var(--text-muted); font-style: normal; line-height: 1.4; border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 0.4rem; }
+
+        .source-box { background-color: rgba(0, 240, 255, 0.02); border: 1px dashed var(--border); border-radius: 6px; padding: 1rem; margin-top: 1rem; }
+        .source-box h4 { font-size: 0.9rem; color: var(--primary); margin-bottom: 0.5rem; text-transform: uppercase; }
+        .source-link { display: block; font-size: 0.85rem; color: #74C4F2; text-decoration: none; margin-bottom: 0.3rem; font-family: monospace; }
+        .source-link:hover { text-decoration: underline; color: var(--primary); }
+
+        @media (max-width: 900px) {
+            .main-container { flex-direction: column; height: auto; }
+            .sidebar { width: 100%; height: auto; border-right: none; border-bottom: 1px solid var(--border); }
+            .content-area { overflow-y: visible; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-text">
+            <h1>Arquitectura <span>NEP</span> Genérica Estructural</h1>
+            <p>Marco de Simulación y Validación Física para Sistemas de Propulsión Nuclear Eléctrica (Basado en el SR-1 <span class="project">FREEDOM</span> Framework)</p>
+        </div>
+        <div class="flag-container" title="Desarrollo Tecnológico de Matriz Nacional Argentina">
+            <div class="flag-stripe flag-blue"></div>
+            <div class="flag-stripe flag-white"><div class="flag-sun"></div></div>
+            <div class="flag-stripe flag-blue"></div>
+        </div>
+    </header>
+
+    <div class="main-container">
+        
+        <aside class="sidebar">
+            <h2 class="section-title">Parámetros de Entrada</h2>
+            
+            <div class="control-group">
+                <label for="propellant">Gas Propelente</label>
+                <select id="propellant" onchange="calculatePhysics()">
+                    <option value="krypton">Criptón (Kr) - Núcleo de la Propuesta</option>
+                    <option value="xenon">Xenón (Xe) - Alternativa Comercial Pesada</option>
+                </select>
+                <div id="propellant-note" class="param-note"></div>
+            </div>
+
+            <div class="control-group">
+                <label for="voltage">Voltaje de Aceleración (V) <span id="voltage-val" class="value">2500 V</span></label>
+                <input type="range" id="voltage" min="1000" max="5000" step="100" value="2500" oninput="calculatePhysics()">
+                <div class="param-note">Afecta la diferencia de potencial electrostático en las rejillas iónicas.</div>
+            </div>
+
+            <div class="control-group">
+                <label for="power">Potencia Térmica del Reactor (Q<sub>th</sub>) <span id="power-val" class="value">500 kW</span></label>
+                <input type="range" id="power" min="100" max="1500" step="50" value="500" oninput="calculatePhysics()">
+                <div class="param-note">Calor térmico total bruto generado por las barras de combustible del núcleo de fisión.</div>
+            </div>
+
+            <div class="control-group">
+                <label for="area">Área Total de Radiadores (A) <span id="area-val" class="value">120 m²</span></label>
+                <input type="range" id="area" min="40" max="300" step="10" value="120" oninput="calculatePhysics()">
+                <div class="param-note">Superficie neta disponible para emitir radiación infrarroja de desecho al vacío.</div>
+            </div>
+        </aside>
+
+        <main class="content-area">
+            
+            <nav class="tabs-nav">
+                <button class="tab-btn active" onclick="switchTab(event, 'tab-dashboard')">📊 Diagnóstico Físico Automático</button>
+                <button class="tab-btn" onclick="switchTab(event, 'tab-defense')">📄 Defensa Técnica y Enlaces Oficiales</button>
+            </nav>
+
+            <div id="tab-dashboard" class="tab-content active">
+                
+                <h2 class="section-title">Resultados Dinámicos de la Simulación</h2>
+                <div id="thermal-status" class="status-box"></div>
+
+                <div class="grid-outputs">
+                    <div class="output-card">
+                        <div class="label">Velocidad de Escape (v<sub>e</sub>)</div>
+                        <div id="out-ve" class="value">0.0</div>
+                        <div class="unit">km/s</div>
+                    </div>
+                    <div class="output-card">
+                        <div class="label">Impulso Específico (I<sub>sp</sub>)</div>
+                        <div id="out-isp" class="value">0</div>
+                        <div class="unit">segundos</div>
+                    </div>
+                    <div class="output-card">
+                        <div class="label">Potencia Eléctrica (P<sub>e</sub>)</div>
+                        <div id="out-pe" class="value">0</div>
+                        <div class="unit">kWe</div>
+                    </div>
+                    <div class="output-card">
+                        <div class="label">Temperatura de Radiadores</div>
+                        <div id="out-temp" class="value">0.0</div>
+                        <div class="unit">°C</div>
+                    </div>
+                </div>
+
+                <h2 class="section-title">Visualización de Estructuras 3D (Caso de Estudio: Sonda Dawn / SR-1 Freedom Framework)</h2>
+                <div class="viewer-3d-container" id="viewer-container">
+                    <div class="viewer-3d-title" id="viewer-tag">📐 Análisis Geométrico (Orbital 360°)</div>
+                    
+                    <div class="viewer-fault-overlay" id="fault-overlay">
+                        <div class="viewer-fault-badge">⚠️ COLLAPSE RISK: THERMAL FATIGUE DETECTED</div>
+                    </div>
+
+                    <model-viewer 
+                        id="spacecraft-model"
+                        src="[https://modelviewer.dev/shared-assets/models/Solmap.gltf](https://modelviewer.dev/shared-assets/models/Solmap.gltf)" 
+                        alt="Estructura modular adaptativa con paneles y radiadores alineados" 
+                        auto-rotate 
+                        camera-controls 
+                        shadow-intensity="10"
+                        exposure="0.9"
+                        background-color="#050811">
                     </model-viewer>
                 </div>
 
@@ -469,19 +915,19 @@
                     
                     <div class="source-box">
                         <h4>Fuentes Científicas de Referencia:</h4>
-                        <a href="https://www.nasa.gov/news-release/nasa-unveils-initiatives-to-achieve-americas-national-space-policy/" class="source-link" target="_blank">→ NASA Initiatives & National Space Policy (SR-1 Freedom Reference Framework)</a>
-                        <a href="https://www.nasa.gov/centers/glenn/technology/lon_propulsion.html" class="source-link" target="_blank">→ NASA Glenn Research Center: Gridded Ion Propulsion Core Physics</a>
+                        <a href="[https://www.nasa.gov/news-release/nasa-unveils-initiatives-to-achieve-americas-national-space-policy/](https://www.nasa.gov/news-release/nasa-unveils-initiatives-to-achieve-americas-national-space-policy/)" class="source-link" target="_blank">→ NASA Initiatives & National Space Policy (SR-1 Freedom Reference Framework)</a>
+                        <a href="[https://www.nasa.gov/centers/glenn/technology/lon_propulsion.html](https://www.nasa.gov/centers/glenn/technology/lon_propulsion.html)" class="source-link" target="_blank">→ NASA Glenn Research Center: Gridded Ion Propulsion Core Physics</a>
                     </div>
                 </div>
 
                 <div class="tech-block">
                     <h3>2. Configuración y Lazo de Gestión Térmica <span class="badge">Lazo Secundario</span></h3>
                     <p>La disipación de calor en sistemas espaciales es compleja debido a la ausencia de atmósfera para los procesos de transferencia por conducción o convección. Todo el calor remanente no convertido por el Ciclo Brayton (65% de la potencia bruta del reactor) debe transferirse a través de un lazo de refrigeración secundario y expulsarse mediante radiación infrarroja.</p>
-                    <p>La architecture propone la disposición de radiadores planos compuestos de carbono-carbono estructurados de forma longitudinal al eje central de la plataforma. El uso de tubos de calor (Heat Pipes) de Titanio encapsulando fluidos de cambio de fase permite mantener el balance térmico de los componentes e instrumentos científicos sin añadir sistemas redundantes de bombeo mecánico.</p>
+                    <p>La arquitectura propone la disposición de radiadores planos compuestos de carbono-carbono estructurados de forma longitudinal al eje central de la plataforma. El uso de tubos de calor (Heat Pipes) de Titanio encapsulando fluidos de cambio de fase permite mantener el balance térmico de los componentes e instrumentos científicos sin añadir sistemas redundantes de bombeo mecánico.</p>
                     
                     <div class="source-box">
                         <h4>Fuentes Científicas de Referencia:</h4>
-                        <a href="https://www.nasa.gov/tdm/fission-surface-power/" class="source-link" target="_blank">→ NASA Technology Demonstrations: Fission Power Heat Rejection Systems</a>
+                        <a href="[https://www.nasa.gov/tdm/fission-surface-power/](https://www.nasa.gov/tdm/fission-surface-power/)" class="source-link" target="_blank">→ NASA Technology Demonstrations: Fission Power Heat Rejection Systems</a>
                     </div>
                 </div>
 
@@ -512,7 +958,7 @@
                     
                     <div class="source-box">
                         <h4>Canales de Divulgación Académica de Referencia:</h4>
-                        <a href="https://www.unc.edu.ar/comunicaci%C3%B3n/uniciencia" class="source-link" target="_blank">→ Uniciencia (Universidad Nacional de Córdoba) - Divulgación de Modelos de Simulación y Soberanía Tecnológica</a>
+                        <a href="[https://www.unc.edu.ar/comunicaci%C3%B3n/uniciencia](https://www.unc.edu.ar/comunicaci%C3%B3n/uniciencia)" class="source-link" target="_blank">→ Uniciencia (Universidad Nacional de Córdoba) - Divulgación de Modelos de Simulación y Soberanía Tecnológica</a>
                     </div>
                 </div>
             </div>
@@ -521,9 +967,11 @@
     </div>
 
     <script>
+        // Constantes Físicas Exactas
         const q = 1.602176634e-19; 
         const NA = 6.02214076e23;  
 
+        // Masas atómicas reales de los elementos (en kg)
         const masses = {
             krypton: 83.798 / (NA * 1000), 
             xenon: 131.293 / (NA * 1000)   
@@ -546,12 +994,12 @@
 
             const eta_brayton = 0.35;
             const P_e_kW = Q_th_kW * eta_brayton;
-            const Q_disipado_W = (Q_th_kW - P_e_kW) * 1000; 
+            const Q_desecho_termico_W = (Q_th_kW - P_e_kW) * 1000; // Calor sobrante neto a disipar
 
             const epsilon = 0.90; 
             const sigma = 5.670374419e-8; 
             
-            const T_fourth = Q_disipado_W / (epsilon * sigma * A);
+            const T_fourth = Q_desecho_termico_W / (epsilon * sigma * A);
             const T_kelvin = Math.pow(T_fourth, 0.25);
             const T_celsius = T_kelvin - 273.15;
 
@@ -567,25 +1015,27 @@
             document.getElementById('out-pe').innerText = Math.round(P_e_kW);
             document.getElementById('out-temp').innerText = T_celsius.toFixed(1);
 
-            // GESTIÓN DE ALERTAS VISUALES INTEGRADAS
+            // MANEJO ALGORÍTMICO DE ALERTAS Y SIMULACIÓN DE FALLA EN ENTORNO 3D
             const statusBox = document.getElementById('thermal-status');
             const modelViewer = document.getElementById('spacecraft-model');
             const faultOverlay = document.getElementById('fault-overlay');
             const viewerTag = document.getElementById('viewer-tag');
 
+            // El límite de fatiga de las aleaciones ligeras convencionales en el vacío es ~350°C
             if (T_celsius > 350) {
                 statusBox.className = "status-box invalid";
-                statusBox.innerHTML = "❌ <strong>DISEÑO INVIABLE:</strong> La temperatura operativa de los radiadores (" + T_celsius.toFixed(1) + "°C) supera el límite de fatiga térmica de las aleaciones de soporte (350°C). Incremente el Área de Radiadores o disminuya la Potencia Térmica.";
+                statusBox.innerHTML = "❌ <strong>DISEÑO INVIABLE:</strong> La temperatura operativa de los radiadores (" + T_celsius.toFixed(1) + "°C) supera el límite de fatiga térmica de las aleaciones de soporte (350°C). Incremente el Área de Radiadores o disminuya la Potencia Térmica del reactor.";
                 
-                // Entorno de Falla: Cambia fondo pero la figura sigue existiendo
+                // Activar Interfaz Visual de Falla Crítica en el 3D
                 faultOverlay.style.display = 'flex';
-                modelViewer.style.backgroundColor = '#250c0c'; 
+                modelViewer.style.backgroundColor = '#1F0808'; // Tono rojo de alerta de diagnóstico
                 viewerTag.style.color = 'var(--danger)';
                 viewerTag.innerText = "🚨 DIAGNÓSTICO DE CRASH TÉRMICO";
             } else if (T_celsius < 40) {
                 statusBox.className = "status-box warning";
                 statusBox.innerHTML = "⚠️ <strong>ALERTA DE FLUIDO:</strong> La temperatura de balance térmico es baja (" + T_celsius.toFixed(1) + "°C). Existe riesgo latente de congelamiento o transición de fase incompleta en el lazo secundario.";
                 
+                // Resetear estados normales del 3D
                 faultOverlay.style.display = 'none';
                 modelViewer.style.backgroundColor = '#050811';
                 viewerTag.style.color = 'var(--warning)';
@@ -594,6 +1044,7 @@
                 statusBox.className = "status-box valid";
                 statusBox.innerHTML = "✓ <strong>CONCEPCIÓN TÉRMICA VIABLE:</strong> Equilibrio térmico estacionario estable a " + T_celsius.toFixed(1) + "°C. Las tasas de disipación cierran bajo las envolventes operativas de referencia.";
                 
+                // Entorno nominal estable
                 faultOverlay.style.display = 'none';
                 modelViewer.style.backgroundColor = '#050811';
                 viewerTag.style.color = 'var(--primary)';
@@ -601,11 +1052,18 @@
             }
         }
 
+        // Sistema de navegación por pestañas
         function switchTab(event, tabId) {
             const tabs = document.getElementsByClassName('tab-content');
-            for (let i = 0; i < tabs.length; i++) { tabs[i].classList.remove('active'); }
+            for (let i = 0; i < tabs.length; i++) {
+                tabs[i].classList.remove('active');
+            }
+            
             const buttons = document.getElementsByClassName('tab-btn');
-            for (let i = 0; i < buttons.length; i++) { buttons[i].classList.remove('active'); }
+            for (let i = 0; i < buttons.length; i++) {
+                buttons[i].classList.remove('active');
+            }
+            
             document.getElementById(tabId).classList.add('active');
             event.currentTarget.classList.add('active');
         }
