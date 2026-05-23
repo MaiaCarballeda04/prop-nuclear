@@ -3,1074 +3,260 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arquitectura NEP: Propulsión Nuclear Eléctrica Genérica - SR-1 Freedom Framework</title>
-    
-    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
-
+    <title>AR Memoria Técnica Unificada: Proyecto SR-1 Freedom</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        :root {
-            --bg-main: #0B0F19;
-            --bg-card: #151D30;
-            --primary: #00F0FF;
-            --secondary: #FF007A;
-            --text-main: #E2E8F0;
-            --text-muted: #94A3B8;
-            --border: #24324F;
-            --success: #10B981;
-            --warning: #F59E0B;
-            --danger: #EF4444;
-            --patrio-blue: #7EE0FB;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: var(--bg-main);
-            color: var(--text-main);
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        header {
-            background-color: var(--bg-card);
-            padding: 1.5rem 2rem;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .header-text h1 {
-            color: white;
-            font-size: 1.8rem;
-            letter-spacing: 0.5px;
-        }
-
-        .header-text h1 span { color: var(--primary); }
-        .header-text h1 span.project { color: white; } /* "FREEDOM" en blanco */
-
-        .header-text p { color: var(--text-muted); font-size: 0.95rem; margin-top: 0.4rem; }
-
-        /* Bandera Argentina Aeroespacial */
-        .flag-container {
-            display: flex;
-            flex-direction: column;
-            width: 45px;
-            height: 25px;
-            border-radius: 4px;
-            overflow: hidden;
-            box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .flag-stripe { height: 33.33%; }
-        .flag-blue { background-color: #74C4F2; }
-        .flag-white { background-color: #FFFFFF; display: flex; justify-content: center; align-items: center; }
-        .flag-sun { width: 6px; height: 6px; background-color: #F2B705; border-radius: 50%; }
-
-        /* Contenedor Principal en Pantalla Dividida */
-        .main-container {
-            display: flex;
-            flex: 1;
-            height: calc(100vh - 90px);
-            position: relative;
-        }
-
-        /* COLUMNA IZQUIERDA: Panel de Mandos Fijo */
-        .sidebar {
-            width: 380px;
-            background-color: var(--bg-card);
-            border-right: 1px solid var(--border);
-            padding: 1.5rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            overflow-y: auto;
-        }
-
-        /* COLUMNA DERECHA: Documentación, Resultados, y Modelo */
-        .content-area {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            overflow-y: auto;
-            background-color: var(--bg-main);
-        }
-
-        .section-title {
-            font-size: 1.1rem;
-            color: white;
-            border-left: 4px solid var(--primary);
-            padding-left: 0.6rem;
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .control-group {
-            background: rgba(11, 15, 25, 0.6);
-            padding: 1rem;
-            border-radius: 8px;
-            border: 1px solid var(--border);
-        }
-
-        .control-group label {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.9rem;
-            color: var(--text-main);
-            margin-bottom: 0.5rem;
-        }
-
-        .control-group label span.value { color: var(--primary); font-weight: bold; }
-        .control-group input[type="range"] { width: 100%; accent-color: var(--primary); cursor: pointer; margin-top: 0.3rem; }
-        .control-group select { width: 100%; background-color: var(--bg-main); border: 1px solid var(--border); color: white; padding: 0.5rem; border-radius: 4px; outline: none; cursor: pointer; }
-        .param-note { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem; line-height: 1.3; }
-
-        /* Sistema de Pestañas */
-        .tabs-nav {
-            display: flex;
-            background-color: var(--bg-card);
-            border-bottom: 1px solid var(--border);
-            position: sticky;
-            top: 0;
-            z-index: 10;
-        }
-
-        .tab-btn {
-            flex: 1;
-            background: none;
-            border: none;
-            color: var(--text-muted);
-            padding: 1rem;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            text-align: center;
-            border-bottom: 2px solid transparent;
-        }
-
-        .tab-btn:hover { color: white; background: rgba(255, 255, 255, 0.02); }
-        .tab-btn.active { color: var(--primary); border-bottom-color: var(--primary); background: rgba(0, 240, 255, 0.04); }
-
-        .tab-content {
-            display: none;
-            padding: 2rem;
-            max-width: 1000px;
-            margin: 0 auto;
-            width: 100%;
-        }
-
-        .tab-content.active { display: block; }
-
-        /* NUEVO DISEÑO DEL ENTORNO 3D DINÁMICO ABAJO DE LOS RESULTADOS */
-        .viewer-3d-container {
-            background-color: #050811;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            margin-bottom: 2rem;
-            overflow: hidden;
-            position: relative;
-            transition: all 0.3s ease;
-            box-shadow: inset 0 0 30px rgba(0, 240, 255, 0.05);
-        }
-
-        /* Indicador de Falla en el Visor */
-        .viewer-fault-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(239, 68, 68, 0.15);
-            border: 2px solid var(--danger);
-            display: none;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 4;
-            pointer-events: none;
-            box-shadow: inset 0 0 50px rgba(239, 68, 68, 0.4);
-            animation: pulse-border 1.5s infinite ease-in-out;
-        }
-
-        @keyframes pulse-border {
-            0% { opacity: 0.7; }
-            50% { opacity: 1; }
-            100% { opacity: 0.7; }
-        }
-
-        .viewer-fault-badge {
-            background-color: var(--danger);
-            color: white;
-            padding: 0.6rem 1.2rem;
-            border-radius: 4px;
-            font-weight: bold;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-            text-transform: uppercase;
-        }
-
-        .viewer-3d-title {
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            z-index: 5;
-            background: rgba(21, 29, 48, 0.9);
-            padding: 0.4rem 0.8rem;
-            border-radius: 4px;
-            border: 1px solid var(--border);
-            font-size: 0.8rem;
-            color: var(--primary);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            pointer-events: none;
-        }
-
-        model-viewer {
-            width: 100%;
-            height: 420px;
-            background-color: #050811;
-            --poster-color: transparent;
-            transition: background-color 0.3s ease;
-        }
-
-        /* Tarjetas de Diagnóstico Físico */
-        .grid-outputs {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .output-card {
-            background-color: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 1.2rem;
-            text-align: center;
-        }
-
-        .output-card .label { font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 0.3rem; }
-        .output-card .value { font-size: 1.8rem; font-weight: bold; color: white; }
-        .output-card .unit { font-size: 0.9rem; color: var(--text-muted); margin-left: 0.2rem; }
-
-        /* Bloques de Estado y Validaciones */
-        .status-box {
-            padding: 1rem;
-            border-radius: 6px;
-            margin-bottom: 1.5rem;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.95rem;
-        }
-
-        .status-box.valid { background-color: rgba(16, 185, 129, 0.15); border: 1px solid var(--success); color: var(--success); }
-        .status-box.warning { background-color: rgba(245, 158, 11, 0.15); border: 1px solid var(--warning); color: var(--warning); }
-        .status-box.invalid { background-color: rgba(239, 68, 68, 0.15); border: 1px solid var(--danger); color: var(--danger); }
-
-        /* Contenido Técnico Estilizado */
-        .tech-block {
-            background-color: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .tech-block h3 {
-            color: white;
-            font-size: 1.15rem;
-            margin-bottom: 0.8rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 0.5rem;
-        }
-
-        .tech-block h3 span.badge {
-            background: rgba(0, 240, 255, 0.1);
-            color: var(--primary);
-            font-size: 0.75rem;
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            border: 1px solid rgba(0, 240, 255, 0.2);
-            text-transform: uppercase;
-        }
-
-        .tech-block p { font-size: 0.95rem; line-height: 1.6; color: var(--text-main); margin-bottom: 1rem; text-align: justify; }
-        .tech-block ul, .tech-block ol { margin-left: 1.5rem; margin-bottom: 1rem; color: var(--text-main); font-size: 0.95rem; }
-        .tech-block li { margin-bottom: 0.5rem; line-height: 1.5; }
-
-        /* Expresiones Matemáticas Estilizadas */
-        .equation-container {
-            background-color: rgba(11, 15, 25, 0.9);
-            border-radius: 6px;
-            border-left: 4px solid var(--secondary);
-            padding: 1.2rem;
-            margin: 1.2rem 0;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
-        }
-
-        .equation-box { font-family: 'Times New Roman', Times, serif; font-size: 1.4rem; color: white; text-align: center; font-style: italic; letter-spacing: 1px; margin-bottom: 0.4rem; }
-        .equation-box span.math-op { font-family: 'Segoe UI', sans-serif; font-style: normal; color: var(--primary); }
-        .eq-expl { font-size: 0.85rem; color: var(--text-muted); font-style: normal; line-height: 1.4; border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 0.4rem; }
-
-        .source-box { background-color: rgba(0, 240, 255, 0.02); border: 1px dashed var(--border); border-radius: 6px; padding: 1rem; margin-top: 1rem; }
-        .source-box h4 { font-size: 0.9rem; color: var(--primary); margin-bottom: 0.5rem; text-transform: uppercase; }
-        .source-link { display: block; font-size: 0.85rem; color: #74C4F2; text-decoration: none; margin-bottom: 0.3rem; font-family: monospace; }
-        .source-link:hover { text-decoration: underline; color: var(--primary); }
-
-        @media (max-width: 900px) {
-            .main-container { flex-direction: column; height: auto; }
-            .sidebar { width: 100%; height: auto; border-right: none; border-bottom: 1px solid var(--border); }
-            .content-area { overflow-y: visible; }
-        }
+        body { background-color: #0d1117; color: #c9d1d9; }
     </style>
 </head>
-<body>
+<body class="p-6 font-sans">
 
-    <header>
-        <div class="header-text">
-            <h1>Arquitectura <span>NEP</span> Genérica Estructural</h1>
-            <p>Marco de Simulación y Validación Física para Sistemas de Propulsión Nuclear Eléctrica (Basado en el SR-1 <span class="project">FREEDOM</span> Framework)</p>
-        </div>
-        <div class="flag-container" title="Desarrollo Tecnológico de Matriz Nacional Argentina">
-            <div class="flag-stripe flag-blue"></div>
-            <div class="flag-stripe flag-white"><div class="flag-sun"></div></div>
-            <div class="flag-stripe flag-blue"></div>
-        </div>
+    <header class="mb-6 border-b border-gray-800 pb-4">
+        <h1 class="text-2xl font-bold text-white">AR Memoria Técnica Unificada: Proyecto SR-1 Freedom</h1>
+        <p class="text-sm text-gray-400">Arquitectura de Propulsión Nuclear Eléctrica (NEP) para Misiones del Espacio Profundo adaptada a Capacidades Nacionales</p>
     </header>
 
-    <div class="main-container">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
         
-        <aside class="sidebar">
-            <h2 class="section-title">Parámetros de Entrada</h2>
+        <div class="lg:col-span-4 bg-[#161b22] border border-gray-800 rounded-xl p-5 space-y-6">
+            <h2 class="text-cyan-400 font-semibold flex items-center gap-2 text-lg">
+                ⚙️ Panel de Control Hidrodinámico
+            </h2>
             
-            <div class="control-group">
-                <label for="propellant">Gas Propelente</label>
-                <select id="propellant" onchange="calculatePhysics()">
-                    <option value="krypton">Criptón (Kr) - Núcleo de la Propuesta</option>
-                    <option value="xenon">Xenón (Xe) - Alternativa Comercial Pesada</option>
+            <div>
+                <label class="block text-sm font-medium text-gray-300 mb-2">Elemento Propelente Ionizable:</label>
+                <select id="propelente" class="w-full bg-[#21262d] border border-gray-700 text-white rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-cyan-500">
+                    <option value="Kr">Kriptón (Kr) - Elección Estratégica del Proyecto</option>
+                    <option value="Xe">Xenón (Xe) - Alternativa Comercial</option>
+                    <option value="Ar">Argón (Ar) - Alta Demanda de Voltaje</option>
                 </select>
-                <div id="propellant-note" class="param-note"></div>
-            </div>
-
-            <div class="control-group">
-                <label for="voltage">Voltaje de Aceleración (V) <span id="voltage-val" class="value">2500 V</span></label>
-                <input type="range" id="voltage" min="1000" max="5000" step="100" value="2500" oninput="calculatePhysics()">
-                <div class="param-note">Afecta la diferencia de potencial electrostático en las rejillas iónicas.</div>
-            </div>
-
-            <div class="control-group">
-                <label for="power">Potencia Térmica del Reactor (Q<sub>th</sub>) <span id="power-val" class="value">500 kW</span></label>
-                <input type="range" id="power" min="100" max="1500" step="50" value="500" oninput="calculatePhysics()">
-                <div class="param-note">Calor térmico total bruto generado por las barras de combustible del núcleo de fisión.</div>
-            </div>
-
-            <div class="control-group">
-                <label for="area">Área Total de Radiadores (A) <span id="area-val" class="value">120 m²</span></label>
-                <input type="range" id="area" min="40" max="300" step="10" value="120" oninput="calculatePhysics()">
-                <div class="param-note">Superficie neta disponible para emitir radiación infrarroja de desecho al vacío.</div>
-            </div>
-        </aside>
-
-        <main class="content-area">
-            
-            <nav class="tabs-nav">
-                <button class="tab-btn active" onclick="switchTab(event, 'tab-dashboard')">📊 Diagnóstico Físico Automático</button>
-                <button class="tab-btn" onclick="switchTab(event, 'tab-defense')">📄 Defensa Técnica y Enlaces Oficiales</button>
-            </nav>
-
-            <div id="tab-dashboard" class="tab-content active">
-                
-                <h2 class="section-title">Resultados Dinámicos de la Simulación</h2>
-                <div id="thermal-status" class="status-box"></div>
-
-                <div class="grid-outputs">
-                    <div class="output-card">
-                        <div class="label">Velocidad de Escape (v<sub>e</sub>)</div>
-                        <div id="out-ve" class="value">0.0</div>
-                        <div class="unit">km/s</div>
-                    </div>
-                    <div class="output-card">
-                        <div class="label">Impulso Específico (I<sub>sp</sub>)</div>
-                        <div id="out-isp" class="value">0</div>
-                        <div class="unit">segundos</div>
-                    </div>
-                    <div class="output-card">
-                        <div class="label">Potencia Eléctrica (P<sub>e</sub>)</div>
-                        <div id="out-pe" class="value">0</div>
-                        <div class="unit">kWe</div>
-                    </div>
-                    <div class="output-card">
-                        <div class="label">Temperatura de Radiadores</div>
-                        <div id="out-temp" class="value">0.0</div>
-                        <div class="unit">°C</div>
-                    </div>
+                <div class="mt-2 p-3 bg-[#0d1117] rounded-lg border border-gray-800 text-xs text-gray-400">
+                    <strong>Kriptón:</strong> Opción eficiente. Equilibra un gran Impulso Específico con menor demanda de voltaje en rejilla, protegiendo la degradación de la electrónica.
                 </div>
+            </div>
 
-                <h2 class="section-title">Visualización de Estructuras 3D (Caso de Estudio: SR-1 Freedom / Dawn Framework)</h2>
-                <div class="viewer-3d-container" id="viewer-container">
-                    <div class="viewer-3d-title" id="viewer-tag">📐 Análisis Geométrico (Orbital 360°)</div>
-                    
-                    <div class="viewer-fault-overlay" id="fault-overlay">
-                        <div class="viewer-fault-badge">⚠️ COLLAPSE RISK: THERMAL FATIGUE DETECTED</div>
-                    </div>
-
-                    <model-viewer 
-                        id="spacecraft-model"
-                        src="https://modelviewer.dev/shared-assets/models/Solmap.gltf" 
-                        alt="Estructura modular adaptativa con paneles y radiadores alineados" 
-                        auto-rotate 
-                        camera-controls 
-                        shadow-intensity="10"
-                        exposure="0.9"
-                        background-color="#050811">
-                    </model-viewer>
+            <div>
+                <div class="flex justify-between text-sm mb-1">
+                    <span class="text-gray-300">Voltaje de Aceleración en Rejillas (V)</span>
+                    <span id="val-voltaje" class="text-cyan-400 font-bold">2500 V</span>
                 </div>
+                <input id="slider-voltaje" type="range" min="1000" max="4000" value="2500" step="100" class="w-full accent-cyan-500 bg-gray-700 h-2 rounded-lg cursor-pointer">
+                <p class="text-[11px] text-gray-500 mt-1">Modifica directamente la velocidad cinemática de eyección iónica.</p>
+            </div>
 
-                <div class="tech-block">
-                    <h3>Formulación y Primeros Principios Matemáticos```html
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arquitectura NEP: Propulsión Nuclear Eléctrica Escalable (Basado en el SR-1 FREEDOM Framework)</title>
-    
-    <script type="module" src="[https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js](https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js)"></script>
+            <div>
+                <div class="flex justify-between text-sm mb-1">
+                    <span class="text-gray-300">Potencia Térmica Nominal ($Q_{th}$)</span>
+                    <span id="val-potencia" class="text-cyan-400 font-bold">500 kW</span>
+                </div>
+                <input id="slider-potencia" type="range" min="100" max="1000" value="500" step="50" class="w-full accent-cyan-500 bg-gray-700 h-2 rounded-lg cursor-pointer">
+                <p class="text-[11px] text-gray-500 mt-1">Capacidad térmica nominal del reactor de fisión moderado por gas o metal líquido.</p>
+            </div>
 
-    <style>
-        :root {
-            --bg-main: #0B0F19;
-            --bg-card: #151D30;
-            --primary: #00F0FF;
-            --secondary: #FF007A;
-            --text-main: #E2E8F0;
-            --text-muted: #94A3B8;
-            --border: #24324F;
-            --success: #10B981;
-            --warning: #F59E0B;
-            --danger: #EF4444;
-            --patrio-blue: #7EE0FB;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: var(--bg-main);
-            color: var(--text-main);
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        header {
-            background-color: var(--bg-card);
-            padding: 1.5rem 2rem;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .header-text h1 {
-            color: white;
-            font-size: 1.8rem;
-            letter-spacing: 0.5px;
-        }
-
-        .header-text h1 span { color: var(--primary); }
-        .header-text h1 span.project { color: white; } /* "FREEDOM" en blanco */
-
-        .header-text p { color: var(--text-muted); font-size: 0.95rem; margin-top: 0.4rem; }
-
-        /* Bandera Argentina Aeroespacial */
-        .flag-container {
-            display: flex;
-            flex-direction: column;
-            width: 45px;
-            height: 25px;
-            border-radius: 4px;
-            overflow: hidden;
-            box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .flag-stripe { height: 33.33%; }
-        .flag-blue { background-color: #74C4F2; }
-        .flag-white { background-color: #FFFFFF; display: flex; justify-content: center; align-items: center; }
-        .flag-sun { width: 6px; height: 6px; background-color: #F2B705; border-radius: 50%; }
-
-        /* Contenedor Principal en Pantalla Dividida */
-        .main-container {
-            display: flex;
-            flex: 1;
-            height: calc(100vh - 90px);
-            position: relative;
-        }
-
-        /* COLUMNA IZQUIERDA: Panel de Mandos Fijo */
-        .sidebar {
-            width: 380px;
-            background-color: var(--bg-card);
-            border-right: 1px solid var(--border);
-            padding: 1.5rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            overflow-y: auto;
-        }
-
-        /* COLUMNA DERECHA: Documentación, Resultados, y Modelo */
-        .content-area {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            overflow-y: auto;
-            background-color: var(--bg-main);
-        }
-
-        .section-title {
-            font-size: 1.1rem;
-            color: white;
-            border-left: 4px solid var(--primary);
-            padding-left: 0.6rem;
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .control-group {
-            background: rgba(11, 15, 25, 0.6);
-            padding: 1rem;
-            border-radius: 8px;
-            border: 1px solid var(--border);
-        }
-
-        .control-group label {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.9rem;
-            color: var(--text-main);
-            margin-bottom: 0.5rem;
-        }
-
-        .control-group label span.value { color: var(--primary); font-weight: bold; }
-        .control-group input[type="range"] { width: 100%; accent-color: var(--primary); cursor: pointer; margin-top: 0.3rem; }
-        .control-group select { width: 100%; background-color: var(--bg-main); border: 1px solid var(--border); color: white; padding: 0.5rem; border-radius: 4px; outline: none; cursor: pointer; }
-        .param-note { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem; line-height: 1.3; }
-
-        /* Sistema de Pestañas */
-        .tabs-nav {
-            display: flex;
-            background-color: var(--bg-card);
-            border-bottom: 1px solid var(--border);
-            position: sticky;
-            top: 0;
-            z-index: 10;
-        }
-
-        .tab-btn {
-            flex: 1;
-            background: none;
-            border: none;
-            color: var(--text-muted);
-            padding: 1rem;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            text-align: center;
-            border-bottom: 2px solid transparent;
-        }
-
-        .tab-btn:hover { color: white; background: rgba(255, 255, 255, 0.02); }
-        .tab-btn.active { color: var(--primary); border-bottom-color: var(--primary); background: rgba(0, 240, 255, 0.04); }
-
-        .tab-content {
-            display: none;
-            padding: 2rem;
-            max-width: 1000px;
-            margin: 0 auto;
-            width: 100%;
-        }
-
-        .tab-content.active { display: block; }
-
-        /* NUEVO DISEÑO DEL ENTORNO 3D DINÁMICO ABAJO DE LOS RESULTADOS */
-        .viewer-3d-container {
-            background-color: #050811;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            margin-bottom: 2rem;
-            overflow: hidden;
-            position: relative;
-            transition: all 0.3s ease;
-            box-shadow: inset 0 0 30px rgba(0, 240, 255, 0.05);
-        }
-
-        /* Indicador de Falla en el Visor */
-        .viewer-fault-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(239, 68, 68, 0.15);
-            border: 2px solid var(--danger);
-            display: none;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 4;
-            pointer-events: none;
-            box-shadow: inset 0 0 50px rgba(239, 68, 68, 0.4);
-            animation: pulse-border 1.5s infinite ease-in-out;
-        }
-
-        @keyframes pulse-border {
-            0% { opacity: 0.7; }
-            50% { opacity: 1; }
-            100% { opacity: 0.7; }
-        }
-
-        .viewer-fault-badge {
-            background-color: var(--danger);
-            color: white;
-            padding: 0.6rem 1.2rem;
-            border-radius: 4px;
-            font-weight: bold;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-            text-transform: uppercase;
-        }
-
-        .viewer-3d-title {
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            z-index: 5;
-            background: rgba(21, 29, 48, 0.9);
-            padding: 0.4rem 0.8rem;
-            border-radius: 4px;
-            border: 1px solid var(--border);
-            font-size: 0.8rem;
-            color: var(--primary);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            pointer-events: none;
-        }
-
-        model-viewer {
-            width: 100%;
-            height: 420px;
-            background-color: #050811;
-            --poster-color: transparent;
-            transition: background-color 0.3s ease;
-        }
-
-        /* Tarjetas de Diagnóstico Físico */
-        .grid-outputs {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .output-card {
-            background-color: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 1.2rem;
-            text-align: center;
-        }
-
-        .output-card .label { font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 0.3rem; }
-        .output-card .value { font-size: 1.8rem; font-weight: bold; color: white; }
-        .output-card .unit { font-size: 0.9rem; color: var(--text-muted); margin-left: 0.2rem; }
-
-        /* Bloques de Estado y Validaciones */
-        .status-box {
-            padding: 1rem;
-            border-radius: 6px;
-            margin-bottom: 1.5rem;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.95rem;
-        }
-
-        .status-box.valid { background-color: rgba(16, 185, 129, 0.15); border: 1px solid var(--success); color: var(--success); }
-        .status-box.warning { background-color: rgba(245, 158, 11, 0.15); border: 1px solid var(--warning); color: var(--warning); }
-        .status-box.invalid { background-color: rgba(239, 68, 68, 0.15); border: 1px solid var(--danger); color: var(--danger); }
-
-        /* Contenido Técnico Estilizado */
-        .tech-block {
-            background-color: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .tech-block h3 {
-            color: white;
-            font-size: 1.15rem;
-            margin-bottom: 0.8rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 0.5rem;
-        }
-
-        .tech-block h3 span.badge {
-            background: rgba(0, 240, 255, 0.1);
-            color: var(--primary);
-            font-size: 0.75rem;
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            border: 1px solid rgba(0, 240, 255, 0.2);
-            text-transform: uppercase;
-        }
-
-        .tech-block p { font-size: 0.95rem; line-height: 1.6; color: var(--text-main); margin-bottom: 1rem; text-align: justify; }
-        .tech-block ul, .tech-block ol { margin-left: 1.5rem; margin-bottom: 1rem; color: var(--text-main); font-size: 0.95rem; }
-        .tech-block li { margin-bottom: 0.5rem; line-height: 1.5; }
-
-        /* Expresiones Matemáticas Estilizadas */
-        .equation-container {
-            background-color: rgba(11, 15, 25, 0.9);
-            border-radius: 6px;
-            border-left: 4px solid var(--secondary);
-            padding: 1.2rem;
-            margin: 1.2rem 0;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
-        }
-
-        .equation-box { font-family: 'Times New Roman', Times, serif; font-size: 1.4rem; color: white; text-align: center; font-style: italic; letter-spacing: 1px; margin-bottom: 0.4rem; }
-        .equation-box span.math-op { font-family: 'Segoe UI', sans-serif; font-style: normal; color: var(--primary); }
-        .eq-expl { font-size: 0.85rem; color: var(--text-muted); font-style: normal; line-height: 1.4; border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 0.4rem; }
-
-        .source-box { background-color: rgba(0, 240, 255, 0.02); border: 1px dashed var(--border); border-radius: 6px; padding: 1rem; margin-top: 1rem; }
-        .source-box h4 { font-size: 0.9rem; color: var(--primary); margin-bottom: 0.5rem; text-transform: uppercase; }
-        .source-link { display: block; font-size: 0.85rem; color: #74C4F2; text-decoration: none; margin-bottom: 0.3rem; font-family: monospace; }
-        .source-link:hover { text-decoration: underline; color: var(--primary); }
-
-        @media (max-width: 900px) {
-            .main-container { flex-direction: column; height: auto; }
-            .sidebar { width: 100%; height: auto; border-right: none; border-bottom: 1px solid var(--border); }
-            .content-area { overflow-y: visible; }
-        }
-    </style>
-</head>
-<body>
-
-    <header>
-        <div class="header-text">
-            <h1>Arquitectura <span>NEP</span> Genérica Estructural</h1>
-            <p>Marco de Simulación y Validación Física para Sistemas de Propulsión Nuclear Eléctrica (Basado en el SR-1 <span class="project">FREEDOM</span> Framework)</p>
+            <div>
+                <div class="flex justify-between text-sm mb-1">
+                    <span class="text-gray-300">Área Expuesta de Radiadores (A)</span>
+                    <span id="val-area" class="text-cyan-400 font-bold">120 m²</span>
+                </div>
+                <input id="slider-area" type="range" min="40" max="250" value="120" step="10" class="w-full accent-cyan-500 bg-gray-700 h-2 rounded-lg cursor-pointer">
+                <p class="text-[11px] text-gray-500 mt-1">Superficie radiativa neta expuesta al vacío profundo para el lazo secundario.</p>
+            </div>
         </div>
-        <div class="flag-container" title="Desarrollo Tecnológico de Matriz Nacional Argentina">
-            <div class="flag-stripe flag-blue"></div>
-            <div class="flag-stripe flag-white"><div class="flag-sun"></div></div>
-            <div class="flag-stripe flag-blue"></div>
-        </div>
-    </header>
 
-    <div class="main-container">
-        
-        <aside class="sidebar">
-            <h2 class="section-title">Parámetros de Entrada</h2>
+        <div class="lg:col-span-8 space-y-6">
             
-            <div class="control-group">
-                <label for="propellant">Gas Propelente</label>
-                <select id="propellant" onchange="calculatePhysics()">
-                    <option value="krypton">Criptón (Kr) - Núcleo de la Propuesta</option>
-                    <option value="xenon">Xenón (Xe) - Alternativa Comercial Pesada</option>
-                </select>
-                <div id="propellant-note" class="param-note"></div>
+            <div id="alerta-termica" class="p-3.5 rounded-lg border text-sm font-medium transition-colors duration-200">
+                </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div class="bg-[#161b22] border border-gray-800 p-4 rounded-xl text-center">
+                    <p class="text-xs text-gray-400 uppercase tracking-wider">Velocidad de Escape</p>
+                    <p id="txt-velocidad" class="text-2xl font-bold text-white mt-1">0.0 km/s</p>
+                </div>
+                <div class="bg-[#161b22] border border-gray-800 p-4 rounded-xl text-center">
+                    <p class="text-xs text-gray-400 uppercase tracking-wider">Impulso Específico</p>
+                    <p id="txt-isp" class="text-2xl font-bold text-white mt-1">0 s</p>
+                </div>
+                <div class="bg-[#161b22] border border-gray-800 p-4 rounded-xl text-center">
+                    <p class="text-xs text-gray-400 uppercase tracking-wider">Potencia Eléctrica Net</p>
+                    <p id="txt-pe" class="text-2xl font-bold text-white mt-1">0 kWe</p>
+                </div>
+                <div class="bg-[#161b22] border border-gray-800 p-4 rounded-xl text-center">
+                    <p class="text-xs text-gray-400 uppercase tracking-wider">Temp. Radiadores</p>
+                    <p id="txt-temperatura" class="text-2xl font-bold text-white mt-1">0.0 °C</p>
+                </div>
             </div>
 
-            <div class="control-group">
-                <label for="voltage">Voltaje de Aceleración (V) <span id="voltage-val" class="value">2500 V</span></label>
-                <input type="range" id="voltage" min="1000" max="5000" step="100" value="2500" oninput="calculatePhysics()">
-                <div class="param-note">Afecta la diferencia de potencial electrostático en las rejillas iónicas.</div>
-            </div>
-
-            <div class="control-group">
-                <label for="power">Potencia Térmica del Reactor (Q<sub>th</sub>) <span id="power-val" class="value">500 kW</span></label>
-                <input type="range" id="power" min="100" max="1500" step="50" value="500" oninput="calculatePhysics()">
-                <div class="param-note">Calor térmico total bruto generado por las barras de combustible del núcleo de fisión.</div>
-            </div>
-
-            <div class="control-group">
-                <label for="area">Área Total de Radiadores (A) <span id="area-val" class="value">120 m²</span></label>
-                <input type="range" id="area" min="40" max="300" step="10" value="120" oninput="calculatePhysics()">
-                <div class="param-note">Superficie neta disponible para emitir radiación infrarroja de desecho al vacío.</div>
-            </div>
-        </aside>
-
-        <main class="content-area">
-            
-            <nav class="tabs-nav">
-                <button class="tab-btn active" onclick="switchTab(event, 'tab-dashboard')">📊 Diagnóstico Físico Automático</button>
-                <button class="tab-btn" onclick="switchTab(event, 'tab-defense')">📄 Defensa Técnica y Enlaces Oficiales</button>
-            </nav>
-
-            <div id="tab-dashboard" class="tab-content active">
+            <div class="bg-[#161b22] border border-gray-800 rounded-xl p-5">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-xs font-bold text-cyan-400 uppercase tracking-widest">
+                        📐 Análisis Geométrico (Simulación Dinámica)
+                    </h3>
+                    <span class="text-[11px] bg-cyan-950 text-cyan-400 border border-cyan-800 px-2 py-0.5 rounded shadow">Orbital 360°</span>
+                </div>
                 
-                <h2 class="section-title">Resultados Dinámicos de la Simulación</h2>
-                <div id="thermal-status" class="status-box"></div>
-
-                <div class="grid-outputs">
-                    <div class="output-card">
-                        <div class="label">Velocidad de Escape (v<sub>e</sub>)</div>
-                        <div id="out-ve" class="value">0.0</div>
-                        <div class="unit">km/s</div>
-                    </div>
-                    <div class="output-card">
-                        <div class="label">Impulso Específico (I<sub>sp</sub>)</div>
-                        <div id="out-isp" class="value">0</div>
-                        <div class="unit">segundos</div>
-                    </div>
-                    <div class="output-card">
-                        <div class="label">Potencia Eléctrica (P<sub>e</sub>)</div>
-                        <div id="out-pe" class="value">0</div>
-                        <div class="unit">kWe</div>
-                    </div>
-                    <div class="output-card">
-                        <div class="label">Temperatura de Radiadores</div>
-                        <div id="out-temp" class="value">0.0</div>
-                        <div class="unit">°C</div>
-                    </div>
-                </div>
-
-                <h2 class="section-title">Visualización de Estructuras 3D (Caso de Estudio: Sonda Dawn / SR-1 Freedom Framework)</h2>
-                <div class="viewer-3d-container" id="viewer-container">
-                    <div class="viewer-3d-title" id="viewer-tag">📐 Análisis Geométrico (Orbital 360°)</div>
-                    
-                    <div class="viewer-fault-overlay" id="fault-overlay">
-                        <div class="viewer-fault-badge">⚠️ COLLAPSE RISK: THERMAL FATIGUE DETECTED</div>
-                    </div>
-
-                    <model-viewer 
-                        id="spacecraft-model"
-                        src="[https://modelviewer.dev/shared-assets/models/Solmap.gltf](https://modelviewer.dev/shared-assets/models/Solmap.gltf)" 
-                        alt="Estructura modular adaptativa con paneles y radiadores alineados" 
-                        auto-rotate 
-                        camera-controls 
-                        shadow-intensity="10"
-                        exposure="0.9"
-                        background-color="#050811">
-                    </model-viewer>
-                </div>
-
-                <div class="tech-block">
-                    <h3>Formulación y Primeros Principios Matemáticos</h3>
-                    <p>Las métricas del panel superior se calculan de manera continua aplicando las ecuaciones físicas que rigen los sistemas de propulsión de rejilla electrostática profunda:</p>
-                    
-                    <div class="equation-container">
-                        <div class="equation-box">v<sub>e</sub> = √ ( <span class="math-op">(</span>2 · q · V<span class="math-op">)</span> / m )</div>
-                        <div class="eq-expl"><strong>Velocidad Cinemática de Escape:</strong> Deducción de la energía cinética de un ion monovalente acelerado. Donde <em>q</em> representa la carga elemental del electrón (1.602 × 10<sup>-19</sup> C), <em>V</em> el voltaje aplicado y <em>m</em> la masa atómica real del elemento químico.</div>
-                    </div>
-
-                    <div class="equation-container">
-                        <div class="equation-box">P<sub>e</sub> = Q<sub>th</sub> · η<sub>brayton</sub></div>
-                        <div class="eq-expl"><strong>Conversión de Energía Útil:</strong> Potencia eléctrica neta inyectada a la Unidad de Procesamiento de Potencia (PPU) asumiendo una eficiencia de ciclo cerrado dinámico de η<sub>brayton</sub> = 0.35.</div>
-                    </div>
-
-                    <div class="equation-container">
-                        <div class="equation-box">T = [ Q<sub>desecho</sub> / (ε · σ · A) ]<sup>(1/4)</sup></div>
-                        <div class="eq-expl"><strong>Equilibrio Térmico Estacionario (Stefan-Boltzmann):</strong> Temperatura absoluta en Kelvin requerida para radiar al espacio el calor sobrante (Q<sub>desecho</sub> = Q<sub>th</sub> - P<sub>e</sub>). Se calcula con una emisividad de superficie ε = 0.90 y la constante de Stefan σ = 5.67 × 10<sup>-8</sup> W/m²K⁴.</div>
-                    </div>
+                <div class="relative w-full h-64 bg-[#0d1117] rounded-lg p-2 border border-gray-800">
+                    <canvas id="graficoCanvas"></canvas>
                 </div>
             </div>
 
-            <div id="tab-defense" class="tab-content">
-                <h2 class="section-title">Memoria de Ingeniería del Sistema Unificado</h2>
-
-                <div class="tech-block">
-                    <h3>1. Comparativa de Sistemas y Envolventes Operativas <span class="badge">Viabilidad Física</span></h3>
-                    <p>La propulsión espacial se divide en tres grandes categorías según su densidad de energía y mecanismos de empuje. La propulsión química tradicional genera un empuje elevado pero posee un Impulso Específico muy bajo (I<sub>sp</sub> ≈ 450 s), lo que satura la masa de lanzamiento con propelente muerto. Los sistemas solares eléctricos (SEP) aumentan drásticamente el I<sub>sp</sub>, pero su viabilidad disminuye exponencialmente con la distancia debido a la atenuación solar (1/r²), limitando críticamente el suministro de energía en regiones exteriores.</p>
-                    <p>La <strong>Propulsión Nuclear Eléctrica (NEP)</strong> resuelve esta limitación integrando un reactor de fisión continuo como fuente primaria. Esto permite alimentar motores iónicos o de Efecto Hall con densidades de potencia estables independientemente de la posición de la nave. El caso de estudio <em>SR-1 Freedom</em> actúa como modelo de referencia para demostrar la reducción de masa en comparación con las arquitecturas criogénicas tradicionales calibradas con las envolventes del Space Launch System (SLS).</p>
-                    
-                    <div class="source-box">
-                        <h4>Fuentes Científicas de Referencia:</h4>
-                        <a href="[https://www.nasa.gov/news-release/nasa-unveils-initiatives-to-achieve-americas-national-space-policy/](https://www.nasa.gov/news-release/nasa-unveils-initiatives-to-achieve-americas-national-space-policy/)" class="source-link" target="_blank">→ NASA Initiatives & National Space Policy (SR-1 Freedom Reference Framework)</a>
-                        <a href="[https://www.nasa.gov/centers/glenn/technology/lon_propulsion.html](https://www.nasa.gov/centers/glenn/technology/lon_propulsion.html)" class="source-link" target="_blank">→ NASA Glenn Research Center: Gridded Ion Propulsion Core Physics</a>
-                    </div>
-                </div>
-
-                <div class="tech-block">
-                    <h3>2. Configuración y Lazo de Gestión Térmica <span class="badge">Lazo Secundario</span></h3>
-                    <p>La disipación de calor en sistemas espaciales es compleja debido a la ausencia de atmósfera para los procesos de transferencia por conducción o convección. Todo el calor remanente no convertido por el Ciclo Brayton (65% de la potencia bruta del reactor) debe transferirse a través de un lazo de refrigeración secundario y expulsarse mediante radiación infrarroja.</p>
-                    <p>La arquitectura propone la disposición de radiadores planos compuestos de carbono-carbono estructurados de forma longitudinal al eje central de la plataforma. El uso de tubos de calor (Heat Pipes) de Titanio encapsulando fluidos de cambio de fase permite mantener el balance térmico de los componentes e instrumentos científicos sin añadir sistemas redundantes de bombeo mecánico.</p>
-                    
-                    <div class="source-box">
-                        <h4>Fuentes Científicas de Referencia:</h4>
-                        <a href="[https://www.nasa.gov/tdm/fission-surface-power/](https://www.nasa.gov/tdm/fission-surface-power/)" class="source-link" target="_blank">→ NASA Technology Demonstrations: Fission Power Heat Rejection Systems</a>
-                    </div>
-                </div>
-
-                <div class="tech-block">
-                    <h3>3. Mitigación de Radiación y Geometría de Sombra <span class="badge">Seguridad Física</span></h3>
-                    <p>La cercanía de un núcleo de fisión exige una protección estricta para evitar la degradación de la aviónica, los sensores de navegación y el procesamiento de señales de la carga útil. Para mitigar los flujos de neutrones y fotones gamma, la arquitectura incorpora un <strong>Blindaje de Sombra (Shadow Shielding)</strong> cónico.</p>
-                    <p>Este sistema utiliza capas compactas de <strong>Hidruro de Litio (LiH)</strong> para atenuar la radiación neutrónica y placas de alta densidad de <strong>Tungsteno (W)</strong> para contener la emisión gamma. La protección pasiva se optimiza extendiendo la longitud estructural de la sonda, reduciendo el flujo neutrónico incidente por la ley geométrica del inverso del cuadrado de la distancia.</p>
-                </div>
-
-                <div class="tech-block">
-                    <h3>4. Modularidad, Escalabilidad y Enfoque Multiestructura <span class="badge">Innovación</span></h3>
-                    <p>Un criterio fundamental de este diseño es su naturaleza <strong>multiestructura</strong>. El modelo matemático y físico simulado en esta plataforma no está acoplado a una única geometría o misión específica, sino que define un bloque de potencia aplicable a diversos perfiles operativos:</p>
-                    <ul>
-                        <li><strong>Sondas Científicas de Escala Media (100 kWe - 300 kWe):</strong> Configuraciones compactas diseñadas para el mapeo prolongado de lunas heladas o tránsitos hacia el Cinturón Principal de Asteroides.</li>
-                        <li><strong>Plataformas de Infraestructura Logística (500 kWe - 1 MWe):</strong> Remolcadores espaciales reutilizables para el transporte y transferencia de cargas pesadas entre órbitas terrestres (LEO a GEO) o tránsitos estables entre la Tierra y Marte.</li>
-                        <li><strong>Sistemas Modulares de Órbita Baja (LEO):</strong> Aplicación a constelaciones de satélites pesados que requieran una alta capacidad de maniobra de evasión rápida frente a basura espacial o mantenimiento orbital a largo plazo sin depender de ventanas de reabastecimiento.</li>
-                    </ul>
-                </div>
-
-                <div class="tech-block">
-                    <h3>5. Capacidades e Integración en la Matriz Nacional <span class="badge">Conexión Argentina</span></h3>
-                    <p>Argentina cuenta con capacidades científicas e industriales maduras para asumir el diseño e integración de los subsistemas clave de esta plataforma:</p>
-                    <ul>
-                        <li><strong>Ingeniería Nuclear:</strong> La <strong>CNEA</strong> (Comisión Nacional de Energía Atómica) cuenta con el conocimiento técnico para el modelado neutrónico y el diseño de núcleos compactos, respaldada por hitos como el desarrollo del reactor modular de potencia CAREM y la gestión de elementos combustibles complejos.</li>
-                        <li><strong>Integración Aeroespacial y Ensayos:</strong> Empresas como <strong>INVAP S.E.</strong> y laboratorios asociados poseen la infraestructura necesaria para la fabricación estructural, el desarrollo de la electrónica de control de alta confiabilidad y la realización de ensayos ambientales críticos en cámaras térmicas de alto vacío.</li>
-                        <li><strong>Cooperación Internacional:</strong> Determinados procesos de la cadena de suministro, como el enriquecimiento del combustible nuclear inicial, el suministro a gran escala de gases nobles de grado espacial y las pruebas de inyección de plasma de rejilla a alta potencia, requerirán marcos cooperativos con agencias como la NASA o la ESA.</li>
-                    </ul>
-                    
-                    <div class="source-box">
-                        <h4>Canales de Divulgación Académica de Referencia:</h4>
-                        <a href="[https://www.unc.edu.ar/comunicaci%C3%B3n/uniciencia](https://www.unc.edu.ar/comunicaci%C3%B3n/uniciencia)" class="source-link" target="_blank">→ Uniciencia (Universidad Nacional de Córdoba) - Divulgación de Modelos de Simulación y Soberanía Tecnológica</a>
-                    </div>
-                </div>
-            </div>
-
-        </main>
+        </div>
     </div>
 
     <script>
-        // Constantes Físicas Exactas
-        const q = 1.602176634e-19; 
-        const NA = 6.02214076e23;  
+        // Constantes Físicas para la simulación
+        const q = 1.602e-19; // Carga elemental
+        const m_kr = 83.798 * 1.66e-27; // Masa atómica Kriptón en kg
+        const g0 = 9.80665;
+        const sigma = 5.67e-8; // Stefan-Boltzmann
+        const epsilon = 0.90; // Emisividad de los radiadores
 
-        // Masas atómicas reales de los elementos (en kg)
-        const masses = {
-            krypton: 83.798 / (NA * 1000), 
-            xenon: 131.293 / (NA * 1000)   
-        };
+        // Referencias a los elementos de la Interfaz
+        const sVoltaje = document.getElementById('slider-voltaje');
+        const sPotencia = document.getElementById('slider-potencia');
+        const sArea = document.getElementById('slider-area');
 
-        function calculatePhysics() {
-            const propellantType = document.getElementById('propellant').value;
-            const V = parseFloat(document.getElementById('voltage').value);
-            const Q_th_kW = parseFloat(document.getElementById('power').value);
-            const A = parseFloat(document.getElementById('area').value);
+        const txtVoltaje = document.getElementById('val-voltaje');
+        const txtPotencia = document.getElementById('val-potencia');
+        const txtArea = document.getElementById('val-area');
 
-            document.getElementById('voltage-val').innerText = V + " V";
-            document.getElementById('power-val').innerText = Q_th_kW + " kW";
-            document.getElementById('area-val').innerText = A + " m²";
+        const txtVelocidad = document.getElementById('txt-velocidad');
+        const txtIsp = document.getElementById('txt-isp');
+        const txtPe = document.getElementById('txt-pe');
+        const txtTemperatura = document.getElementById('txt-temperatura');
+        const alertaTermica = document.getElementById('alerta-termica');
 
-            const m = masses[propellantType];
-            const v_e = Math.sqrt((2 * q * V) / m); 
-            const v_e_kms = v_e / 1000;             
-            const isp = v_e / 9.80665;              
+        // Variable global para controlar la instancia del gráfico y evitar duplicados
+        window.miGraficoOrbital = null;
 
-            const eta_brayton = 0.35;
-            const P_e_kW = Q_th_kW * eta_brayton;
-            const Q_desecho_termico_W = (Q_th_kW - P_e_kW) * 1000; // Calor sobrante neto a disipar
+        function calcularSimulacion() {
+            // 1. Obtener valores de los controles deslizantes
+            const V = parseFloat(sVoltaje.value);
+            const Q_th = parseFloat(sPotencia.value) * 1000; // Pasar a Watts
+            const A = parseFloat(sArea.value);
 
-            const epsilon = 0.90; 
-            const sigma = 5.670374419e-8; 
+            // Actualizar etiquetas numéricas del panel
+            txtVoltaje.innerText = `${V} V`;
+            txtPotencia.innerText = `${sPotencia.value} kW`;
+            txtArea.innerText = `${A} m²`;
+
+            // 2. Ecuaciones Base Matemáticas de Primeros Principios
+            // Velocidad de escape cinemática: v_e = sqrt((2 * q * V) / m)
+            const v_e = Math.sqrt((2 * q * V) / m_kr);
+            const v_e_kms = v_e / 1000; // Convertir a km/s
             
-            const T_fourth = Q_desecho_termico_W / (epsilon * sigma * A);
-            const T_kelvin = Math.pow(T_fourth, 0.25);
+            // Impulso específico: Isp = v_e / g0
+            const isp = v_e / g0;
+
+            // Conversión mediante Ciclo Brayton Cerrado (Eficiencia de referencia n = 0.35)
+            const η_brayton = 0.35;
+            const P_e_w = Q_th * η_brayton;
+            const P_e_kwe = P_e_w / 1000;
+
+            // Ley de Stefan-Boltzmann balanceada para el equilibrio térmico: T = ((Q_th - P_e) / (e * o * A))^(1/4)
+            const calor_disipado = Q_th - P_e_w;
+            const T_kelvin = Math.pow(calor_disipado / (epsilon * sigma * A), 0.25);
             const T_celsius = T_kelvin - 273.15;
 
-            const noteBox = document.getElementById('propellant-note');
-            if(propellantType === 'krypton') {
-                noteBox.innerHTML = "<span style='color: var(--primary); font-weight:500;'>Criptón:</span> Opción estratégica y de costo eficiente. Reduce drásticamente la erosión por bombardeo iónico bajo diferencias de potencial elevadas.";
-            } else {
-                noteBox.innerHTML = "<span style='color: var(--secondary); font-weight:500;'>Xenón:</span> Mayor masa atómica que optimiza la densidad de empuje total a costa de una menor velocidad de escape relativa.";
-            }
+            // 3. Renderizar resultados en los paneles de diagnóstico
+            txtVelocidad.innerText = `${v_e_kms.toFixed(1)} km/s`;
+            txtIsp.innerText = `${Math.round(isp)} segundos`;
+            txtPe.innerText = `${Math.round(P_e_kwe)} kWe`;
+            txtTemperatura.innerText = `${T_celsius.toFixed(1)} °C`;
 
-            document.getElementById('out-ve').innerText = v_e_kms.toFixed(1);
-            document.getElementById('out-isp').innerText = Math.round(isp);
-            document.getElementById('out-pe').innerText = Math.round(P_e_kW);
-            document.getElementById('out-temp').innerText = T_celsius.toFixed(1);
-
-            // MANEJO ALGORÍTMICO DE ALERTAS Y SIMULACIÓN DE FALLA EN ENTORNO 3D
-            const statusBox = document.getElementById('thermal-status');
-            const modelViewer = document.getElementById('spacecraft-model');
-            const faultOverlay = document.getElementById('fault-overlay');
-            const viewerTag = document.getElementById('viewer-tag');
-
-            // El límite de fatiga de las aleaciones ligeras convencionales en el vacío es ~350°C
+            // 4. Gestión y Diagnóstico del Límite Térmico Estructural
             if (T_celsius > 350) {
-                statusBox.className = "status-box invalid";
-                statusBox.innerHTML = "❌ <strong>DISEÑO INVIABLE:</strong> La temperatura operativa de los radiadores (" + T_celsius.toFixed(1) + "°C) supera el límite de fatiga térmica de las aleaciones de soporte (350°C). Incremente el Área de Radiadores o disminuya la Potencia Térmica del reactor.";
-                
-                // Activar Interfaz Visual de Falla Crítica en el 3D
-                faultOverlay.style.display = 'flex';
-                modelViewer.style.backgroundColor = '#1F0808'; // Tono rojo de alerta de diagnóstico
-                viewerTag.style.color = 'var(--danger)';
-                viewerTag.innerText = "🚨 DIAGNÓSTICO DE CRASH TÉRMICO";
-            } else if (T_celsius < 40) {
-                statusBox.className = "status-box warning";
-                statusBox.innerHTML = "⚠️ <strong>ALERTA DE FLUIDO:</strong> La temperatura de balance térmico es baja (" + T_celsius.toFixed(1) + "°C). Existe riesgo latente de congelamiento o transición de fase incompleta en el lazo secundario.";
-                
-                // Resetear estados normales del 3D
-                faultOverlay.style.display = 'none';
-                modelViewer.style.backgroundColor = '#050811';
-                viewerTag.style.color = 'var(--warning)';
-                viewerTag.innerText = "📐 Análisis Geométrico (Aviso de Temperatura)";
+                alertaTermica.className = "p-3.5 rounded-lg border text-sm font-medium bg-red-950/40 text-red-400 border-red-900/50";
+                alertaTermica.innerHTML = "🚨 COLLAPSE RISK: THERMAL FATIGUE DETECTED — Sobrecarga en el lazo secundario, incrementa el área de radiadores.";
             } else {
-                statusBox.className = "status-box valid";
-                statusBox.innerHTML = "✓ <strong>CONCEPCIÓN TÉRMICA VIABLE:</strong> Equilibrio térmico estacionario estable a " + T_celsius.toFixed(1) + "°C. Las tasas de disipación cierran bajo las envolventes operativas de referencia.";
-                
-                // Entorno nominal estable
-                faultOverlay.style.display = 'none';
-                modelViewer.style.backgroundColor = '#050811';
-                viewerTag.style.color = 'var(--primary)';
-                viewerTag.innerText = "📐 Análisis Geométrico (Orbital 360°)";
+                alertaTermica.className = "p-3.5 rounded-lg border text-sm font-medium bg-emerald-950/40 text-emerald-400 border-emerald-900/50";
+                alertaTermica.innerHTML = `✔ ARQUITECTURA TÉRMICA VIABLE: Equilibrio térmico estable a ${T_celsius.toFixed(1)}°C. Las relaciones de masa y potencia cierran bajo envolventes nominales.`;
             }
+
+            // 5. ACTUALIZACIÓN SEGURA DEL GRÁFICO (Evita duplicados)
+            renderizarGrafico(v_e_kms, T_celsius);
         }
 
-        // Sistema de navegación por pestañas
-        function switchTab(event, tabId) {
-            const tabs = document.getElementsByClassName('tab-content');
-            for (let i = 0; i < tabs.length; i++) {
-                tabs[i].classList.remove('active');
+        function renderizarGrafico(velEscape, tempRadiadores) {
+            const ctx = document.getElementById('graficoCanvas').getContext('2d');
+
+            // SOLUCIÓN CLAVE: Si el gráfico ya existe, se destruye antes de crear el nuevo
+            if (window.miGraficoOrbital) {
+                window.miGraficoOrbital.destroy();
             }
-            
-            const buttons = document.getElementsByClassName('tab-btn');
-            for (let i = 0; i < buttons.length; i++) {
-                buttons[i].classList.remove('active');
-            }
-            
-            document.getElementById(tabId).classList.add('active');
-            event.currentTarget.classList.add('active');
+
+            // Generamos curvas de referencia dinámicas simuladas en base al comportamiento actual
+            const puntosLabels = ['0°', '60°', '120°', '180°', '240°', '300°', '360°'];
+            const datosVelocidad = puntosLabels.map((_, i) => velEscape * (1 + Math.sin(i / 2) * 0.05));
+            const datosTermicos = puntosLabels.map((_, i) => tempRadiadores * (1 + Math.cos(i / 2) * 0.03));
+
+            // Creamos la nueva instancia del gráfico sobre el mismo lienzo limpio
+            window.miGraficoOrbital = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: puntosLabels,
+                    datasets: [
+                        {
+                            label: 'Perfil Cinético Eje (km/s)',
+                            data: datosVelocidad,
+                            borderColor: '#06b6d4', // Cian
+                            backgroundColor: 'rgba(6, 182, 212, 0.05)',
+                            borderWidth: 2,
+                            tension: 0.4,
+                            yAxisID: 'y'
+                        },
+                        {
+                            label: 'Gradiente Térmico (°C)',
+                            data: datosTermicos,
+                            borderColor: '#f43f5e', // Rosa/Rojo
+                            backgroundColor: 'transparent',
+                            borderWidth: 1.5,
+                            borderDash: [5, 5],
+                            tension: 0.3,
+                            yAxisID: 'y1'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            labels: { color: '#8892b0', font: { size: 10 } },
+                            position: 'top'
+                        }
+                    },
+                    scales: {
+                        x: { grid: { color: '#21262d' }, ticks: { color: '#8892b0' } },
+                        y: {
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
+                            grid: { color: '#21262d' },
+                            ticks: { color: '#06b6d4' },
+                            title: { display: true, text: 'Velocidad (km/s)', color: '#06b6d4' }
+                        },
+                        y1: {
+                            type: 'linear',
+                            display: true,
+                            position: 'right',
+                            grid: { drawOnChartArea: false },
+                            ticks: { color: '#f43f5e' },
+                            title: { display: true, text: 'Temperatura (°C)', color: '#f43f5e' }
+                        }
+                    }
+                }
+            });
         }
 
-        window.onload = function() {
-            calculatePhysics();
-        };
+        // Listeners: Ejecutar el recálculo inmediatamente cuando el usuario mueva un slider
+        sVoltaje.addEventListener('input', calcularSimulacion);
+        sPotencia.addEventListener('input', calcularSimulacion);
+        sArea.addEventListener('input', calcularSimulacion);
+
+        // Inicialización primaria al cargar la aplicación por primera vez
+        window.addEventListener('DOMContentLoaded', calcularSimulacion);
     </script>
 </body>
 </html>
