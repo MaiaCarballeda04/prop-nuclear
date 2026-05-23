@@ -293,8 +293,7 @@ margin-bottom: 0.5rem;
 line-height: 1.5;
 }
 
-/* --- NUEVOS ESTILOS PARA ADAPTACIONES REQUERIDAS --- */
-/* Diagrama de Integración */
+/* --- ESTILOS COMPLEMENTARIOS PARA LAS MEJORAS REQUERIDAS --- */
 .integration-diagram {
 display: flex;
 flex-wrap: wrap;
@@ -333,7 +332,6 @@ color: var(--secondary);
 font-weight: bold;
 font-size: 1.2rem;
 }
-/* Tabla de Riesgos */
 .tech-table {
 width: 100%;
 border-collapse: collapse;
@@ -354,7 +352,6 @@ font-size: 0.8rem;
 .tech-table tr:nth-child(even) {
 background-color: rgba(255,255,255,0.01);
 }
-/* Grid de Escalabilidad */
 .grid-scalability {
 display: grid;
 grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -381,7 +378,7 @@ color: var(--text-muted);
 margin-bottom: 0;
 line-height: 1.4;
 }
-/* --------------------------------------------------- */
+/* ----------------------------------------------------------- */
 
 /* Expresiones Matemáticas Estilizadas (Simulación de LaTeX) */
 .equation-container {
@@ -528,9 +525,11 @@ color: var(--primary);
 <div class="diagram-node">Distribución Eléctrica<span>Alternador Central (P<sub>e</sub>)</span></div>
 <div class="diagram-arrow">➔</div>
 <div class="diagram-node">Motores Iónicos<span>Aceleración Electrostática</span></div>
+<div class="diagram-arrow">➔</div>
+<div class="diagram-node">Radiadores Ténd.<span>Disipación Excedente</span></div>
 </div>
 <p style="margin-top: 0.5rem; font-size: 0.85rem; color: var(--text-muted);">
-*Nota: El calor excedente no convertido por el bloque Brayton es derivado de forma directa hacia el lazo secundario acoplado a los <strong>Radiadores de Disipación Térmica</strong> por radiación infrarroja al vacío.
+*Nota: El flujo visual permite al lector identificar cómo el calor excedente no convertido por el bloque Brayton es derivado de forma directa hacia el lazo secundario de disipación por radiación infrarroja al vacío.
 </p>
 </div>
 
@@ -548,12 +547,12 @@ color: var(--primary);
 <h2 class="section-title">Sistema Unificado</h2>
 
 <div class="tech-block">
-<h3>Perfil de Misión Científica <span class="badge">Caso de estudio</span></h3>
-<p>Para dotar a esta arquitectura de un destino real de alta prioridad para la comunidad científica aeroespacial, el modelo toma como referencia una misión automatizada de larga duración hacia el <strong>Cinturón de Asteroides (Objetivo: 16 Psyche)</strong> o las **Lunas Heladas de Júpiter (Europa/Ganímedes)**.</p>
+<h3>Perfil de Misión Científica y Destino Concreto <span class="badge">Caso de estudio</span></h3>
+<p>Para dotar a esta arquitectura de un propósito científico sólido ante el comité evaluador, el modelo toma como referencia una misión automatizada de larga duración hacia el **Cinturón de Asteroides (Objetivo: 16 Psyche)** o las **Lunas Heladas de Júpiter (Europa/Ganímedes)**.</p>
 <ul>
-<li><strong>Objetivo Científico:</strong> Mapeo de composición metalúrgica profunda mediante espectrometría de masas, altimetría láser y radar de penetración de subsuelo.</li>
-<li><strong>Duración Estimada:</strong> Tránsito de 2.4 años hacia el Cinturón Principal con ventanas dinámicas continuas (ahorro del 45% de tiempo frente a trayectorias de asistencia gravitatoria clásicas).</li>
-<li><strong>Superioridad Física (NEP vs Química/Solar):</strong> Al alejarse del Sol, la irradiancia decae críticamente bajo la ley del cuadrado inverso ($1/r^2$), haciendo que la propulsión Solar Eléctrica (SEP) exija paneles de hectáreas de extensión imposibles de lanzar. Por otra parte, la propulsión química penaliza la masa inicial útil al requerir toneladas insostenibles de oxidante y combustible. La densidad energética del reactor nuclear garantiza potencia continua constante sin importar la distancia astronómica.</li>
+<li><strong>Objetivo Científico:</strong> Mapeo de composición metalúrgica profunda y caracterización geomorfológica mediante espectrometría de masas, altimetría láser y radares de penetración de subsuelo.</li>
+<li><strong>Duración Estimada:</strong> Ventana de tránsito directo de 2.4 años hacia el Cinturón Principal con empuje constante (ahorro del 45% del tiempo de viaje en comparación con trayectorias químicas clásicas).</li>
+<li><strong>Justificación Física (NEP vs Química/Solar):</strong> Al alejarse de la Tierra, la irradiancia solar decae críticamente bajo la ley del cuadrado inverso ($1/r^2$). Esto causa que los sistemas fotovoltaicos (SEP) exijan paneles de proporciones kilométricas inviables para el lanzamiento. Asimismo, la propulsión química tradicional penaliza la masa útil debido a la inmensa carga muerta de combustible requerida. La densidad energética del reactor de fisión asegura potencia eléctrica masiva ininterrumpida en el espacio profundo.</li>
 </ul>
 </div>
 
@@ -564,64 +563,59 @@ color: var(--primary);
 </div>
 
 <div class="tech-block">
-<h3>2. Justificación Técnica y Matriz de Riesgos <span class="badge">Ingeniería</span></h3>
-<p>A pesar de que el balance energético cierra matemáticamente bajo los coeficientes seleccionados en la simulación, la viabilidad operacional del sistema requiere el estudio minucioso de fallas críticas de materiales:</p>
+<h3>2. Justificación Técnica y Matriz de Riesgos Críticos <span class="badge">Ingeniería</span></h3>
+<p>El balance energético del sistema se fundamenta en un acoplamiento riguroso de potencia. Del total de calor bruto generado ($500\text{ kW}_t$), el Ciclo Brayton Cerrado opera con una eficiencia óptima estimada del 35%, transformándola en $\sim 175\text{ kWe}$ de potencia eléctrica útil para los propulsores iónicos, derivando el remanente hacia el lazo de rechazo térmico. No obstante, la viabilidad estructural exige el análisis y mitigación de fallas críticas de materiales:</p>
 <table class="tech-table">
 <thead>
 <tr>
-<th>Aspecto / Riesgo Técnico</th>
-<th>Impacto Físico en la Nave</th>
+<th>Riesgo Técnico Identificado</th>
+<th>Impacto Físico en la Arquitectura</th>
 <th>Estrategia de Mitigación Estructural</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>Eficiencia del Bloque Energético</strong></td>
-<td>De $500\text{ kW}_t$ térmicos brutos ingresados, solo el 35% ($\sim 175\text{ kWe}$) es útil para empuje. El resto debe disiparse como calor residual de forma pasiva.</td>
-<td>Optimización del Ciclo Brayton Cerrado mediante mezclas de gas de trabajo Helio-Xenón (He-Xe).</td>
-</tr>
-<tr>
 <td><strong>Erosión de Rejillas Iónicas</strong></td>
-<td>El bombardeo continuo de iones desalineados degrada el recubrimiento de molibdeno/carbono reduciendo la vida del motor.</td>
-<td>Uso de <strong>Criptón</strong> a voltajes estables para disminuir la sección eficaz de colisión secundaria parásita.</td>
+<td>El bombardeo continuo de iones desalineados degrada el recubrimiento de las rejillas aceleradoras de molibdeno.</td>
+<td>Uso de <strong>Criptón</strong> a densidades estables para optimizar la sección eficaz de colisión electrostática.</td>
 </tr>
 <tr>
 <td><strong>Fatiga Térmica Crítica</strong></td>
-<td>Gradientes de temperatura extremos entre el núcleo ($>1200\text{ K}$) y los radiadores orientados al vacío absoluto.</td>
-<td>Conductos de aleaciones refractarias avanzadas de Tántalo/Renio con juntas flexibles de dilatación.</td>
+<td>Altos gradientes de temperatura constantes entre el núcleo activo ($>1200\text{ K}$) y los radiadores expuestos al vacío.</td>
+<td>Conductos de aleaciones refractarias de Tántalo/Renio dotados de juntas de dilatación flexibles.</td>
 </tr>
 <tr>
 <td><strong>Blindaje Radiológico Pesado</strong></td>
-<td>El flujo de neutrones rápidos y rayos gamma destruye los semiconductores de la aviónica central.</td>
-<td>Configuración de un <strong>Blindaje de Sombra Cónico</strong> en capas alternas de Hidruro de Litio (LiH) y Tungsteno.</td>
+<td>El flujo de neutrones rápidos y rayos gamma emitido degrada los semiconductores de la aviónica central.</td>
+<td>Configuración de un <strong>Blindaje de Sombra Cónico</strong> optimizado en capas de Hidruro de Litio (LiH) y Tungsteno.</td>
 </tr>
 </tbody>
 </table>
 </div>
 
 <div class="tech-block">
-<h3>3. Estrategia de Escalabilidad del Bloque Motor <span class="badge">Modularidad</span></h3>
-<p>El diseño de esta arquitectura no es monolítico, sino concebido bajo un principio de diseño estándar replicable que puede escalarse según el perfil logístico requerido por la carga de pago:</p>
+<h3>3. Estrategia de Escalabilidad Modular del Bloque Motor <span class="badge">Modularidad</span></h3>
+<p>La planta motriz ha sido diseñada bajo un principio modular estándar (Power Block). Este bloque puede ser adaptado o apilado para cubrir un amplio espectro de misiones sin necesidad de rediseñar los subsistemas núcleo:</p>
 <div class="grid-scalability">
 <div class="scale-card">
-<h4>Misiones Cooperativas Breves <span>(100 kWe)</span></h4>
-<p>Configuración compacta optimizada para micro-reactores. Ideal para sondas científicas de exploración ágil en trayectorias directas a asteroides troyanos o cometas.</p>
+<h4>Misiones Pequeñas Cooperativas <span>(100 kWe)</span></h4>
+<p>Configuración compacta optimizada para micro-reactores. Destinada a orbitadores científicos ágiles y sondas de exploración en trayectorias directas a cometas o asteroides troyanos.</p>
 </div>
 <div class="scale-card">
 <h4>Transporte Logístico Pesado <span>(1 MWe)</span></h4>
-<p>Remolcadores orbitales masivos de transferencia de carga pesada (Space Tugs) diseñados para transportar módulos habitables e infraestructura a órbitas lunares o marcianas de manera autónoma.</p>
+<p>Remolcadores espaciales pesados (Space Tugs) diseñados para transferir de forma automatizada infraestructuras, suministros y módulos habitables entre órbitas LEO, cislunares y marcianas.</p>
 </div>
 <div class="scale-card">
 <h4>Constelaciones en Órbitas LEO <span>(Megaconstelaciones)</span></h4>
-<p>Unidades modulares de alta maniobrabilidad operacional. Permite reposicionamiento orbital inmediato ante alertas de colisión y evasión de basura espacial para satélites de gran envergadura.</p>
+<p>Módulos de energía integrados para satélites masivos de telecomunicaciones o defensa que exijan maniobrabilidad orbital extrema, cambios continuos de inclinación y evasión autónoma de basura espacial.</p>
 </div>
 </div>
 </div>
 
 <div class="tech-block">
-<h3>4. Restricciones Regulatorias y Marco Jurídico Internacional <span class="badge">Seguridad Legal</span></h3>
-<p>Cualquier despliegue tecnológico de naturaleza nuclear en el sector espacial está rígidamente condicionado por la gobernanza global. Esta propuesta se encuadra de forma estricta bajo las directrices del **Tratado del Espacio Ultraterrestre de 1967** y los Principios de las Naciones Unidas Relativos a la Utilización de Fuentes de Energía Nuclear en el Espacio (1992).</p>
-<p>Para operar con total seguridad, la arquitectura prohíbe de forma física el encendido del reactor en atmósfera o en órbitas terrestres bajas (LEO). El encendido nuclear solo está permitido una vez que el vector de lanzamiento convencional sitúe a la nave en una <strong>Órbita Segura Permanente (Safe Orbit)</strong>, definida como aquella altitud matemática donde el tiempo de decaimiento orbital por rozamiento excede los miles de años, garantizando así un aislamiento biológico absoluto en caso de fallo prematuro del sistema.</p>
+<h3>4. Restricciones Regulatorias y Marco Jurídico Internacional <span class="badge">Gobernanza</span></h3>
+<p>El despliegue operacional de fuentes de energía nucleares en el espacio ultraterrestre está rígidamente regulado por el derecho internacional. Esta arquitectura se encuadra estrictamente bajo los lineamientos del **Tratado del Espacio Ultraterrestre de 1967** y los Principios de las Naciones Unidas Relativos a la Utilización de Fuentes de Energía Nuclear en el Espacio (1992).</p>
+<p>Para mitigar cualquier tipo de riesgo radiológico sobre la biosfera, el diseño prohíbe físicamente la activación del reactor en la atmósfera terrestre o en órbitas bajas propensas al decaimiento rápido. El sistema permanece inerte durante el lanzamiento convencional y solo se activa una vez alcanzada una **Órbita Segura Permanente (Safe Orbit)**, definida matemáticamente como aquella altitud donde el frenado aerodinámico residual es tan bajo que el tiempo de reentrada excede los miles de años, permitiendo el decaimiento natural de la actividad del núcleo.</p>
 </div>
 
 <div class="tech-block">
