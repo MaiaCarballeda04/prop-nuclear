@@ -651,3 +651,90 @@
     </script>
 </body>
 </html>
+</div>
+                </div>
+            </div>
+</main>
+    </div>
+
+    <script>
+        const q = 1.602176634e-19; 
+        const NA = 6.02214076e23;  
+
+        const masses = {
+            krypton: 83.798 / (NA * 1000), 
+            xenon: 131.293 / (NA * 1000)   
+        };
+
+        function calculatePhysics() {
+            const propellantType = document.getElementById('propellant').value;
+            const V = parseFloat(document.getElementById('voltage').value);
+            const Q_th_kW = parseFloat(document.getElementById('power').value);
+            const A = parseFloat(document.getElementById('area').value);
+
+            document.getElementById('voltage-val').innerText = V + " V";
+            document.getElementById('power-val').innerText = Q_th_kW + " kW";
+            document.getElementById('area-val').innerText = A + " m²";
+
+            const m = masses[propellantType];
+            const v_e = Math.sqrt((2 * q * V) / m); 
+            const v_e_kms = v_e / 1000;             
+            const isp = v_e / 9.80665;              
+
+            const eta_brayton = 0.35;
+            const P_e_kW = Q_th_kW * eta_brayton;
+            const Q_disipado_W = (Q_th_kW - P_e_kW) * 1000; 
+
+            const epsilon = 0.90; 
+            const sigma = 5.670374419e-8; 
+            
+            const T_fourth = Q_disipado_W / (epsilon * sigma * A);
+            const T_kelvin = Math.pow(T_fourth, 0.25);
+            const T_celsius = T_kelvin - 273.15;
+
+            const noteBox = document.getElementById('propellant-note');
+            if(propellantType === 'krypton') {
+                noteBox.innerHTML = "<span style='color: var(--primary); font-weight:500;'>Criptón:</span> Opción estratégica y de costo eficiente. Reduce drásticamente la erosión por bombardeo iónico bajo diferencias de potencial elevadas.";
+            } else {
+                noteBox.innerHTML = "<span style='color: var(--secondary); font-weight:500;'>Xenón:</span> Mayor masa atómica que optimiza la densidad de empuje total a costa de una menor velocidad de escape relativa.";
+            }
+
+            document.getElementById('out-ve').innerText = v_e_kms.toFixed(1);
+            document.getElementById('out-isp').innerText = Math.round(isp);
+            document.getElementById('out-pe').innerText = Math.round(P_e_kW);
+            document.getElementById('out-temp').innerText = T_celsius.toFixed(1);
+
+            const statusBox = document.getElementById('thermal-status');
+            if (T_celsius > 350) {
+                statusBox.className = "status-box invalid";
+                statusBox.innerHTML = "❌ <strong>DISEÑO INVIABLE:</strong> La temperatura operativa de los radiadores (" + T_celsius.toFixed(1) + "°C) supera el límite de fatiga térmica de las aleaciones de soporte (350°C). Incremente el Área de Radiadores o disminuya la Potencia Térmica.";
+            } else if (T_celsius < 40) {
+                statusBox.className = "status-box warning";
+                statusBox.innerHTML = "⚠️ <strong>ALERTA DE FLUIDO:</strong> La temperatura de balance térmico es baja (" + T_celsius.toFixed(1) + "°C). Existe riesgo latente de congelamiento o transición de fase incompleta en el lazo secundario.";
+            } else {
+                statusBox.className = "status-box valid";
+                statusBox.innerHTML = "✓ <strong>CONCEPCIÓN TÉRMICA VIABLE:</strong> Equilibrio térmico estacionario estable a " + T_celsius.toFixed(1) + "°C. Las tasas de disipación cierran bajo las envolventes operativas de referencia.";
+            }
+        }
+
+        function switchTab(event, tabId) {
+            const tabs = document.getElementsByClassName('tab-content');
+            for (let i = 0; i < tabs.length; i++) {
+                tabs[i].classList.remove('active');
+            }
+            
+            const buttons = document.getElementsByClassName('tab-btn');
+            for (let i = 0; i < buttons.length; i++) {
+                buttons[i].classList.remove('active');
+            }
+            
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+
+        window.onload = function() {
+            calculatePhysics();
+        };
+    </script>
+</body>
+</html>
