@@ -195,7 +195,7 @@
             align-items: center;
             z-index: 4;
             pointer-events: none;
-            box-shadow: inset 0 0 50px rgba(239, 68, 68, 0.6);
+            box-shadow: inset 0 0 50px rgba(239, 68, 68, 0.4);
             animation: pulse-border 1.5s infinite ease-in-out;
         }
 
@@ -235,7 +235,8 @@
 
         model-viewer {
             width: 100%;
-            height: 400px;
+            height: 420px;
+            background-color: #050811;
             --poster-color: transparent;
             transition: background-color 0.3s ease;
         }
@@ -340,7 +341,7 @@
     <header>
         <div class="header-text">
             <h1>Arquitectura <span>NEP</span> Genérica Estructural</h1>
-            <p>Marco de Simulación y Validación Física para Sistemas de Propulsión Nuclear Eléctrica de Alta Eficiencia</p>
+            <p>Marco de Simulación y Validation Física para Sistemas de Propulsión Nuclear Eléctrica de Alta Eficiencia</p>
         </div>
         <div class="flag-container" title="Desarrollo Tecnológico de Matriz Nacional Argentina">
             <div class="flag-stripe flag-blue"></div>
@@ -417,7 +418,7 @@
                     </div>
                 </div>
 
-                <h2 class="section-title">Visualización de Estructuras 3D (Caso de Estudio: Sonda Dawn / SR-1 Freedom)</h2>
+                <h2 class="section-title">Visualización de Estructuras 3D (Caso de Estudio: SR-1 Freedom / Dawn NASA)</h2>
                 <div class="viewer-3d-container" id="viewer-container">
                     <div class="viewer-3d-title" id="viewer-tag">📐 Análisis Geométrico (Orbital 360°)</div>
                     
@@ -427,13 +428,13 @@
 
                     <model-viewer 
                         id="spacecraft-model"
-                        src="https://modelviewer.dev/shared-assets/models/Solmap.gltf" 
-                        alt="Estructura modular adaptativa con paneles y radiadores alineados" 
+                        src="https://modelviewer.dev/shared-assets/models/NeilArmstrong.glb" 
+                        alt="Estructura modular adaptativa de simulación" 
                         auto-rotate 
                         camera-controls 
-                        shadow-intensity="10"
-                        exposure="0.9"
-                        background-color="#050811">
+                        shadow-intensity="8"
+                        exposure="1"
+                        interaction-prompt="auto">
                     </model-viewer>
                 </div>
 
@@ -476,7 +477,7 @@
                 <div class="tech-block">
                     <h3>2. Configuración y Lazo de Gestión Térmica <span class="badge">Lazo Secundario</span></h3>
                     <p>La disipación de calor en sistemas espaciales es compleja debido a la ausencia de atmósfera para los procesos de transferencia por conducción o convección. Todo el calor remanente no convertido por el Ciclo Brayton (65% de la potencia bruta del reactor) debe transferirse a través de un lazo de refrigeración secundario y expulsarse mediante radiación infrarroja.</p>
-                    <p>La arquitectura propone la disposición de radiadores planos compuestos de carbono-carbono estructurados de forma longitudinal al eje central de la plataforma. El uso de tubos de calor (Heat Pipes) de Titanio encapsulando fluidos de cambio de fase permite mantener el balance térmico de los componentes e instrumentos científicos sin añadir sistemas redundantes de bombeo mecánico.</p>
+                    <p>La architecture propone la disposición de radiadores planos compuestos de carbono-carbono estructurados de forma longitudinal al eje central de la plataforma. El uso de tubos de calor (Heat Pipes) de Titanio encapsulando fluidos de cambio de fase permite mantener el balance térmico de los componentes e instrumentos científicos sin añadir sistemas redundantes de bombeo mecánico.</p>
                     
                     <div class="source-box">
                         <h4>Fuentes Científicas de Referencia:</h4>
@@ -504,7 +505,7 @@
                     <h3>5. Capacidades e Integración en la Matriz Nacional <span class="badge">Conexión Argentina</span></h3>
                     <p>Argentina cuenta con capacidades científicas e industriales maduras para asumir el diseño e integración de los subsistemas clave de esta plataforma:</p>
                     <ul>
-                        <li><strong>Ingeniería Nuclear:</strong> La <strong>CNEA</strong> (Comisión Nacional de Energía Atómica) cuenta con el conocimiento técnico para el modelado neutrónico y el diseño de núcleos compactos, respaldada por hitos como el desarrollo del reactor modular de potencia CAREM y la gestión de elementos combustibles complexes.</li>
+                        <li><strong>Ingeniería Nuclear:</strong> La <strong>CNEA</strong> (Comisión Nacional de Energía Atómica) cuenta con el conocimiento técnico para el modelado neutrónico y el diseño de núcleos compactos, respaldada por hitos como el desarrollo del reactor modular de potencia CAREM y la gestión de elementos combustibles complejos.</li>
                         <li><strong>Integración Aeroespacial y Ensayos:</strong> Empresas como <strong>INVAP S.E.</strong> y laboratorios asociados poseen la infraestructura necesaria para la fabricación estructural, el desarrollo de la electrónica de control de alta confiabilidad y la realización de ensayos ambientales críticos en cámaras térmicas de alto vacío.</li>
                         <li><strong>Cooperación Internacional:</strong> Determinados procesos de la cadena de suministro, como el enriquecimiento del combustible nuclear inicial, el suministro a gran escala de gases nobles de grado espacial y las pruebas de inyección de plasma de rejilla a alta potencia, requerirán marcos cooperativos con agencias como la NASA o la ESA.</li>
                     </ul>
@@ -566,7 +567,7 @@
             document.getElementById('out-pe').innerText = Math.round(P_e_kW);
             document.getElementById('out-temp').innerText = T_celsius.toFixed(1);
 
-            // MANEJO DE ALERTAS Y SIMULACIÓN DE FALLA EN ENTORNO 3D
+            // GESTIÓN DE ALERTAS VISUALES INTEGRADAS
             const statusBox = document.getElementById('thermal-status');
             const modelViewer = document.getElementById('spacecraft-model');
             const faultOverlay = document.getElementById('fault-overlay');
@@ -576,16 +577,15 @@
                 statusBox.className = "status-box invalid";
                 statusBox.innerHTML = "❌ <strong>DISEÑO INVIABLE:</strong> La temperatura operativa de los radiadores (" + T_celsius.toFixed(1) + "°C) supera el límite de fatiga térmica de las aleaciones de soporte (350°C). Incremente el Área de Radiadores o disminuya la Potencia Térmica.";
                 
-                // Activar Interfaz Visual de Falla Crítica en el 3D
+                // Entorno de Falla: Cambia fondo pero la figura sigue existiendo
                 faultOverlay.style.display = 'flex';
-                modelViewer.style.backgroundColor = '#1F0808'; 
+                modelViewer.style.backgroundColor = '#250c0c'; 
                 viewerTag.style.color = 'var(--danger)';
                 viewerTag.innerText = "🚨 DIAGNÓSTICO DE CRASH TÉRMICO";
             } else if (T_celsius < 40) {
                 statusBox.className = "status-box warning";
                 statusBox.innerHTML = "⚠️ <strong>ALERTA DE FLUIDO:</strong> La temperatura de balance térmico es baja (" + T_celsius.toFixed(1) + "°C). Existe riesgo latente de congelamiento o transición de fase incompleta en el lazo secundario.";
                 
-                // Resetear estados normales del 3D
                 faultOverlay.style.display = 'none';
                 modelViewer.style.backgroundColor = '#050811';
                 viewerTag.style.color = 'var(--warning)';
@@ -594,7 +594,6 @@
                 statusBox.className = "status-box valid";
                 statusBox.innerHTML = "✓ <strong>CONCEPCIÓN TÉRMICA VIABLE:</strong> Equilibrio térmico estacionario estable a " + T_celsius.toFixed(1) + "°C. Las tasas de disipación cierran bajo las envolventes operativas de referencia.";
                 
-                // Entorno nominal estable
                 faultOverlay.style.display = 'none';
                 modelViewer.style.backgroundColor = '#050811';
                 viewerTag.style.color = 'var(--primary)';
