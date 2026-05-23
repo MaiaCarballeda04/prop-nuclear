@@ -7,7 +7,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
     <style>
         body { background-color: #0d1117; color: #c9d1d9; }
         canvas { display: block; width: 100%; height: 100%; }
@@ -17,21 +16,21 @@
 
     <header class="mb-6 border-b border-gray-800 pb-4">
         <h1 class="text-2xl font-bold text-white">AR Memoria Técnica Unificada: Proyecto SR-1 Freedom</h1>
-        <p class="text-sm text-gray-400">Integración de Modelos Vectoriales de la NASA orientados a misiones de exploración profunda</p>
+        <p class="text-sm text-gray-400">Modelado Geométrico Autónomo y Simulación de Arquitecturas de Exploración Espacial</p>
     </header>
 
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
         
         <div class="lg:col-span-4 bg-[#161b22] border border-gray-800 rounded-xl p-5 space-y-6">
             <h2 class="text-cyan-400 font-semibold flex items-center gap-2 text-lg">
-                ⚙️ Panel de Control Hidrodinámico
+                ⚙️ Parametrización del Vector
             </h2>
             
             <div>
-                <label class="block text-sm font-medium text-gray-300 mb-2">Elemento Propelente:</label>
+                <label class="block text-sm font-medium text-gray-300 mb-2">Elemento Propelente Ionizable:</label>
                 <select id="propelente" class="w-full bg-[#21262d] border border-gray-700 text-white rounded-lg p-2.5 text-sm focus:ring-2 focus:ring-cyan-500">
-                    <option value="Kr">Kriptón (Kr) - Configuración Activa</option>
-                    <option value="Xe">Xenón (Xe) - Alternativa</option>
+                    <option value="Kr">Kriptón (Kr) - Elección Estratégica del Proyecto</option>
+                    <option value="Xe">Xenón (Xe) - Alternativa Comercial</option>
                 </select>
             </div>
 
@@ -63,7 +62,7 @@
         <div class="lg:col-span-8 space-y-6">
             
             <div id="alerta-termica" class="p-3.5 rounded-lg border text-sm font-medium transition-colors duration-200 bg-emerald-950/40 text-emerald-400 border-emerald-900/50">
-                ✔ ARQUITECTURA TÉRMICA VIABLE: Sistema en equilibrio estacionario radiativo.
+                ✔ COMPATIBILIDAD GEOMÉTRICA COMPLETA: Renderizado local activo libre de fallos de red.
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
@@ -88,111 +87,164 @@
             <div class="bg-[#161b22] border border-gray-800 rounded-xl p-5">
                 <div class="flex justify-between items-center mb-4">
                     <h3 class="text-xs font-bold text-cyan-400 uppercase tracking-widest flex items-center gap-2">
-                        🚀 Análisis Geométrico (NASA 3D Asset Integration)
+                        🚀 Análisis Geométrico: Perfil Escalar Ares I (Local Vector Render)
                     </h3>
                     <button onclick="resetearCamara()" class="text-[11px] bg-cyan-950 hover:bg-cyan-900 text-cyan-400 border border-cyan-800 px-3 py-1 rounded shadow transition-all">
-                        Restablecer Vista
+                        Centrar Órbita
                     </button>
                 </div>
                 
-                <div id="contenedor3d" class="relative w-full h-96 bg-[#05070b] rounded-lg overflow-hidden border border-gray-800 cursor-grab active:cursor-grabbing flex items-center justify-center">
-                    <div id="loading-spinner" class="absolute text-sm text-cyan-400 bg-[#161b22]/90 border border-cyan-900/50 px-4 py-2 rounded-lg shadow-lg z-10 animate-pulse">
-                        Descargando malla geométrica desde servidores de la NASA...
+                <div id="contenedor3d" class="relative w-full h-96 bg-[#05070b] rounded-lg overflow-hidden border border-gray-800 cursor-grab active:cursor-grabbing">
                     </div>
-                </div>
-                <p class="text-[11px] text-gray-500 mt-2 text-right">💡 Arrastra el mouse para rotar el modelo en 360°. Usa la rueda del mouse para el zoom.</p>
+                <p class="text-[11px] text-gray-500 mt-2 text-right">💡 Interactividad total habilitada: Mantén presionado el clic izquierdo y arrastra para rotar 360°.</p>
             </div>
 
         </div>
     </div>
 
     <script>
-        let escena, camara, renderizador, controles, nasaModel, estrellas;
+        let escena, camara, renderizador, controles, aresGroup, estrellas;
 
         const sVoltaje = document.getElementById('slider-voltaje');
         const sPotencia = document.getElementById('slider-potencia');
         const sArea = document.getElementById('slider-area');
 
-        function inicializarEntorno3D() {
+        function inicializarSimulador() {
             const contenedor = document.getElementById('contenedor3d');
             const ancho = contenedor.clientWidth;
             const alto = contenedor.clientHeight;
 
-            // 1. Configuración de la Escena
+            // 1. Inicializar la escena espacial
             escena = new THREE.Scene();
-            escena.background = new THREE.Color(0x05070b);
+            escena.background = new THREE.Color(0x04060a);
 
-            // 2. Cámara (Ajustada para encuadrar un cohete vertical de gran escala)
-            camara = new THREE.PerspectiveCamera(45, ancho / alto, 0.1, 1000);
-            camara.position.set(0, 8, 22);
+            // 2. Ajustar cámara para capturar la esbeltez vertical del Ares I
+            camara = new THREE.PerspectiveCamera(40, ancho / alto, 0.1, 1000);
+            camara.position.set(0, 4, 18);
 
-            // 3. Renderizador WebGL
+            // 3. Configurar renderizador gráfico
             renderizador = new THREE.WebGLRenderer({ antialias: true });
             renderizador.setSize(ancho, alto);
             renderizador.setPixelRatio(window.devicePixelRatio);
-            // Ajustes de tono e iluminación física para texturas GLTF auténticas
-            renderizador.outputEncoding = THREE.sRGBEncoding;
             contenedor.appendChild(renderizador.domElement);
 
-            // 4. Controles Orbit 360°
+            // 4. Activar controles orbitales 360° fluidos
             controles = new THREE.OrbitControls(camara, renderizador.domElement);
             controles.enableDamping = true;
             controles.dampingFactor = 0.05;
-            controles.maxDistance = 50;
-            controles.minDistance = 5;
+            controles.maxDistance = 40;
+            controles.minDistance = 6;
 
-            // 5. Esquema de Iluminación de Estudio de Ingeniería
-            const luzAmbiental = new THREE.AmbientLight(0xffffff, 0.6); // Luz base para ver detalles ocultos
+            // 5. Configuración Lumínica de Órbita Baja
+            const luzAmbiental = new THREE.AmbientLight(0x444444);
             escena.add(luzAmbiental);
 
-            const luzSol = new THREE.DirectionalLight(0xffffff, 1.4);
-            luzSol.position.set(10, 20, 15);
+            const luzSol = new THREE.DirectionalLight(0xffffff, 1.3);
+            luzSol.position.set(10, 15, 10);
             escena.add(luzSol);
 
-            const luzContraste = new THREE.DirectionalLight(0x06b6d4, 0.5); // Reflejo azul espacial trasero
-            luzContraste.position.set(-10, -5, -15);
-            escena.add(luzContraste);
+            const luzEspectralAzul = new THREE.DirectionalLight(0x00a3ff, 0.4); // Reflejo atmosférico
+            luzEspectralAzul.position.set(-10, -5, -10);
+            escena.add(luzEspectralAzul);
 
-            // 6. Campo de Estrellas de Fondo
+            // 6. Cargar campo estelar de fondo
             generarEstrellas();
 
-            // 7. INTEGRACIÓN IMPRESCINDIBLE: El GLTFLoader para el objeto de la NASA
-            const loader = new THREE.GLTFLoader();
-            
-            // Usamos la URL directa del recurso GLTF del vector de lanzamiento espacial de la NASA
-            const urlModeloNASA = 'https://raw.githubusercontent.com/mrdoob/three.js/master/examples/models/gltf/SpaceRocket.glb';
+            // 7. CONSTRUCCIÓN MATEMÁTICA INTERNA DEL VECTOR ARES I
+            aresGroup = new THREE.Group();
+            construirModeloNativoAresI();
+            escena.add(aresGroup);
 
-            loader.load(
-                urlModeloNASA,
-                function (gltf) {
-                    nasaModel = gltf.scene;
-                    
-                    // Ajustar escala y posición para que quede perfectamente centrado en el panel
-                    nasaModel.scale.set(0.4, 0.4, 0.4);
-                    nasaModel.position.set(0, -3, 0);
-                    
-                    escena.add(nasaModel);
-
-                    // Ocultar el letrero de carga una vez renderizado con éxito
-                    document.getElementById('loading-spinner').style.display = 'none';
-                },
-                function (xhr) {
-                    // Progreso de descarga opcional en consola
-                    console.log((xhr.loaded / xhr.total * 100) + '% cargado');
-                },
-                function (error) {
-                    console.error('Error crítico al cargar el asset 3D de la NASA:', error);
-                    document.getElementById('loading-spinner').innerText = 'Fallo al conectar con el servidor de la NASA. Verifica los enlaces.';
-                }
-            );
-
+            // Escuchar cambios de redimensión de pantalla
             window.addEventListener('resize', enRedimension);
+
+            // Lanzar bucle infinito de renderizado
             animar();
+        }
+
+        function construirModeloNativoAresI() {
+            // Materiales de la NASA (Blanco satinado para las etapas, gris metálico para uniones y toberas)
+            const matBlancoNasa = new THREE.MeshStandardMaterial({ color: 0xeeeeee, roughness: 0.4, metalness: 0.1 });
+            const matGrisMetal = new THREE.MeshStandardMaterial({ color: 0x4f545c, roughness: 0.5, metalness: 0.7 });
+            const matInteretapa = new THREE.MeshStandardMaterial({ color: 0xdddddd, roughness: 0.4, metalness: 0.2 });
+            const matEscapePluma = new THREE.MeshBasicMaterial({ color: 0xffaa00 }); // Fuego de estado sólido trasero
+
+            // --- ETAPA 1: Propulsor de Cohete Sólido (SRB de 5 Segmentos) ---
+            const geomEtapa1 = new THREE.CylinderGeometry(0.28, 0.28, 5.5, 16);
+            const etapa1 = new THREE.Mesh(geomEtapa1, matBlancoNasa);
+            etapa1.position.y = -2.5;
+            aresGroup.add(etapa1);
+
+            // Anillos de segmentación del SRB (Detalle técnico característico del Ares I)
+            for (let i = 0; i < 5; i++) {
+                const geomAnillo = new THREE.CylinderGeometry(0.29, 0.29, 0.06, 16);
+                const anillo = new THREE.Mesh(geomAnillo, matGrisMetal);
+                anillo.position.y = -4.8 + (i * 1.1);
+                aresGroup.add(anillo);
+            }
+
+            // Tobera de escape inferior de la primera etapa
+            const geomTobera1 = new THREE.CylinderGeometry(0.22, 0.35, 0.5, 12);
+            const tobera1 = new THREE.Mesh(geomTobera1, matGrisMetal);
+            tobera1.position.y = -5.5;
+            aresGroup.add(tobera1);
+
+            // --- INTERETAPA: Cono de acoplamiento y transición de diámetros ---
+            const geomInter = new THREE.CylinderGeometry(0.5, 0.28, 0.9, 16);
+            const interetapa = new THREE.Mesh(geomInter, matInteretapa);
+            interetapa.position.y = 0.7;
+            aresGroup.add(interetapa);
+
+            // --- ETAPA 2: Tanque Criogénico de Combustible Líquido (Más ancho) ---
+            const geomEtapa2 = new THREE.CylinderGeometry(0.5, 0.5, 4.0, 16);
+            const etapa2 = new THREE.Mesh(geomEtapa2, matBlancoNasa);
+            etapa2.position.y = 3.15;
+            aresGroup.add(etapa2);
+
+            // Siglas o detalles de la pintura en la Etapa Superior (Anillo de instrumentación)
+            const geomAnilloInst = new THREE.CylinderGeometry(0.505, 0.505, 0.3, 16);
+            const anilloInst = new THREE.Mesh(geomAnilloInst, matGrisMetal);
+            anilloInst.position.y = 5.0;
+            aresGroup.add(anilloInst);
+
+            // --- CÁPSULA ORION Y ADAPTADOR DE NAVE ---
+            const geomAdaptadorOrion = new THREE.CylinderGeometry(0.32, 0.5, 0.6, 16);
+            const adaptadorOrion = new THREE.Mesh(geomAdaptadorOrion, matBlancoNasa);
+            adaptadorOrion.position.y = 5.45;
+            aresGroup.add(adaptadorOrion);
+
+            // Módulo de Comando Orion (Forma cónica aeroespacial)
+            const geomOrion = new THREE.CylinderGeometry(0.12, 0.32, 0.5, 16);
+            const orion = new THREE.Mesh(geomOrion, matGrisMetal);
+            orion.position.y = 6.0;
+            aresGroup.add(orion);
+
+            // --- LAS (Launch Abort System): Torre de Salvamento en la punta ---
+            const geomTorreAborto = new THREE.CylinderGeometry(0.04, 0.04, 1.2, 8);
+            const torreAborto = new THREE.Mesh(geomTorreAborto, matBlancoNasa);
+            torreAborto.position.y = 6.85;
+            aresGroup.add(torreAborto);
+
+            const geomPuntaTorre = new THREE.ConeGeometry(0.07, 0.3, 8);
+            const puntaTorre = new THREE.Mesh(geomPuntaTorre, matGrisMetal);
+            puntaTorre.position.y = 7.6;
+            aresGroup.add(puntaTorre);
+
+            // --- EFECTO REACTIVO: Pluma de fuego cinético inferior ---
+            const geomFuego = new THREE.ConeGeometry(0.2, 1.8, 12);
+            const fuego = new THREE.Mesh(geomFuego, matEscapePluma);
+            fuego.name = "plumaFuego";
+            fuego.position.y = -6.6;
+            fuego.rotation.x = Math.PI; // Apuntando hacia abajo
+            aresGroup.add(fuego);
+
+            // Centrar ligeramente el pivote del grupo completo para que rote de forma elegante en el eje Y
+            aresGroup.position.y = -0.5;
         }
 
         function generarEstrellas() {
             const geomEstrellas = new THREE.BufferGeometry();
-            const cuentaEstrellas = 600;
+            const cuentaEstrellas = 700;
             const posiciones = new Float32Array(cuentaEstrellas * 3);
 
             for(let i = 0; i < cuentaEstrellas * 3; i += 3) {
@@ -200,7 +252,7 @@
                 const v = Math.random();
                 const theta = u * 2.0 * Math.PI;
                 const phi = Math.acos(2.0 * v - 1.0);
-                const r = 90 + Math.random() * 10;
+                const r = 75 + Math.random() * 15;
 
                 posiciones[i] = r * Math.sin(phi) * Math.cos(theta);
                 posiciones[i+1] = r * Math.sin(phi) * Math.sin(theta);
@@ -208,28 +260,32 @@
             }
 
             geomEstrellas.setAttribute('position', new THREE.BufferAttribute(posiciones, 3));
-            const matEstrellas = new THREE.PointsMaterial({ color: 0xffffff, size: 0.25 });
+            const matEstrellas = new THREE.PointsMaterial({ color: 0xffffff, size: 0.28 });
             estrellas = new THREE.Points(geomEstrellas, matEstrellas);
             escena.add(estrellas);
         }
 
-        function actualizarFisica() {
+        // Simulación física interactiva acoplada a los Sliders de la interfaz técnica
+        function actualizarFisicaYEscalas() {
             const voltaje = parseFloat(sVoltaje.value);
             const area = parseFloat(sArea.value);
+            const potencia = parseFloat(sPotencia.value);
 
-            // Cambiar textos informativos numéricos del panel
+            // Actualizar etiquetas numéricas de texto en la pantalla
             document.getElementById('val-voltaje').innerText = `${voltaje} V`;
-            document.getElementById('val-potencia').innerText = `${sPotencia.value} kW`;
+            document.getElementById('val-potencia').innerText = `${potencia} kW`;
             document.getElementById('val-area').innerText = `${area} m²`;
 
-            // Efecto reactivo en el modelo de la NASA: Si el usuario exige más potencia, alteramos dinámicamente la escala del vector
-            if (nasaModel) {
-                const factorEscalaDinamica = 0.4 * (1 + (area - 120) * 0.001);
-                nasaModel.scale.set(factorEscalaDinamica, 0.4, factorEscalaDinamica);
+            // Vincular los sliders al modelo 3D del Ares I: Al aumentar el voltaje, incrementamos la pluma de empuje
+            const pluma = aresGroup.getObjectByName("plumaFuego");
+            if (pluma) {
+                const factorEmpuje = voltaje / 2500;
+                pluma.scale.set(1, factorEmpuje, 1);
+                pluma.position.y = -6.1 - (0.9 * factorEmpuje);
             }
 
-            // Cálculos físicos nominales
-            const Q_th = parseFloat(sPotencia.value) * 1000;
+            // Fórmulas termodinámicas y electrostáticas nominales en tiempo real
+            const Q_th = potencia * 1000;
             const P_e = Q_th * 0.35;
             const v_escape = Math.sqrt((2 * 1.602e-19 * voltaje) / (83.798 * 1.66e-27)) / 1000;
             const isp = (v_escape * 1000) / 9.80665;
@@ -239,10 +295,20 @@
             document.getElementById('txt-isp').innerText = `${Math.round(isp)} s`;
             document.getElementById('txt-pe').innerText = `${Math.round(P_e/1000)} kWe`;
             document.getElementById('txt-temperatura').innerText = `${T_celsius.toFixed(1)} °C`;
+
+            // Lógica de advertencia de fatiga térmica en radiadores
+            const alerta = document.getElementById('alerta-termica');
+            if (T_celsius > 350) {
+                alerta.className = "p-3.5 rounded-lg border text-sm font-medium bg-red-950/40 text-red-400 border-red-900/50";
+                alerta.innerHTML = "🚨 RIESGO DE COLAPSO TÉRMICO EN RADIADORES: Incrementa de inmediato la superficie emisora.";
+            } else {
+                alerta.className = "p-3.5 rounded-lg border text-sm font-medium bg-emerald-950/40 text-emerald-400 border-emerald-900/50";
+                alerta.innerHTML = `✔ ARQUITECTURA TÉRMICA VIABLE: Equilibrio térmico estable a ${T_celsius.toFixed(1)}°C.`;
+            }
         }
 
         function resetearCamara() {
-            camara.position.set(0, 8, 22);
+            camara.position.set(0, 4, 18);
             controles.target.set(0, 0, 0);
             controles.update();
         }
@@ -254,30 +320,31 @@
             renderizador.setSize(contenedor.clientWidth, contenedor.clientHeight);
         }
 
-        // Loop continuo a 60 FPS
+        // Loop de renderizado continuo (60 cuadros por segundo sustentables)
         function animar() {
             requestAnimationFrame(animar);
 
-            // Rotación pasiva constante del modelo de la NASA para apreciación 360° automatizada
-            if (nasaModel) {
-                nasaModel.rotation.y += 0.003;
+            // Rotación suave del Ares I sobre su propio eje vertical para análisis geométrico automático
+            if (aresGroup) {
+                aresGroup.rotation.y += 0.004;
             }
 
+            // Deriva galáctica lenta de las estrellas de fondo
             if (estrellas) {
                 estrellas.rotation.y += 0.0002;
             }
 
-            controles.update();
+            controles.update(); // Mantiene la inercia del paneo manual
             renderizador.render(escena, camara);
         }
 
         window.addEventListener('DOMContentLoaded', () => {
-            inicializarEntorno3D();
-            actualizarFisica();
+            inicializarSimulador();
+            actualizarFisicaYEscalas();
 
-            sVoltaje.addEventListener('input', actualizarFisica);
-            sPotencia.addEventListener('input', actualizarFisica);
-            sArea.addEventListener('input', actualizarFisica);
+            sVoltaje.addEventListener('input', actualizarFisicaYEscalas);
+            sPotencia.addEventListener('input', actualizarFisicaYEscalas);
+            sArea.addEventListener('input', actualizarFisicaYEscalas);
         });
     </script>
 </body>
