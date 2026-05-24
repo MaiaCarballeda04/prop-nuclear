@@ -2,7 +2,7 @@
 Este proyecto es un simulador conceptual desarrollado en su gran mayoria con los datos abiertos de la nasa
 este simulador integra los principales subsistemas de una arquitectura de propulsión nuclear electrica
 
--Ejecución del codigo-
+-Ejecución del código-
 descargar este repositorio y abrir "index.html" en el navegador
 
 referencias bibliograficas:
