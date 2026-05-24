@@ -592,8 +592,8 @@
             <div class="control-group">
                 <label for="propellant">Gas Propelente</label>
                 <select id="propellant" onchange="calculatePhysics()">
-                    <option value="krypton">Criptón (Kr) - Núcleo de la Propuesta</option>
-                    <option value="xenon">Xenón (Xe) - Alternativa Comercial Pesada</option>
+                    <option value="krypton">Criptón (Kr) - menor erosión de rejillas, costo eficiente.</option>
+                    <option value="xenon">Xenón (Xe) - Alternativa comercial pesada y mayor densidad de empuje</option>
                 </select>
                 <div id="propellant-note" class="param-note"></div>
             </div>
@@ -654,7 +654,7 @@
 
                 <div class="viewer-container">
                     <div class="viewer-header">
-                        <span class="viewer-title">Monitoreo de escala estructural (Ares I)</span>
+                        <span class="viewer-title">Monitoreo de escala estructural</span>
                         <button class="btn-reset" onclick="resetView()">Centrar Vista</button>
                     </div>
                     <div id="canvas-3d-target" class="canvas-wrapper"></div>
