@@ -472,10 +472,11 @@
             background-color: rgba(255,255,255,0.01);
         }
         .grid-scalability {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            display: flex;
+            flex-wrap: wrap;
             gap: 1rem;
             margin-top: 1rem;
+            width: 100%;
         }
         .scale-card {
             background: rgba(11, 15, 25, 0.5);
@@ -483,6 +484,8 @@
             border-radius: 6px;
             padding: 1rem;
             border-top: 3px solid var(--secondary);
+            flex: 1 1 calc(33.333% - 1rem);
+            min-width: 150px;
         }
         .scale-card h4 {
             color: white;
@@ -719,7 +722,7 @@
                 
                 <div class="tech-block">
                     <h3>2. Justificación Técnica y Matriz de Riesgos Críticos </h3>
-                    <p>El balance energético del sistema se fundamenta en un acoplamiento riguroso de potencia. Del total de calor bruto generado ($500\text{ kW}_t$), el Ciclo Brayton Cerrado opera con una eficiencia óptima estimada del 35%, transformándola en $\sim 175\text{ kWe}$ de potencia eléctrica útil para los propulsores iónicos, derivando el remanente hacia el lazo de rechazo térmico. No obstante, la viabilidad estructural exige el análisis y mitigación de fallas críticas de materiales:</p>
+                    <p>El balance energético del sistema se fundamenta en un acoplamiento riguroso de potencia. Del total de calor bruto generado (500 kW<sub>t</sub>), el Ciclo Brayton Cerrado opera con una eficiencia óptima estimada del 35%, transformándola en 175 kW<sub>e</sub> de potencia eléctrica útil para los propulsores iónicos, derivando el remanente hacia el lazo de rechazo térmico. No obstante, la viabilidad estructural exige el análisis y mitigación de fallas críticas de materiales:</p>
                     <table class="tech-table">
                         <thead>
                             <tr>
@@ -736,7 +739,7 @@
                             </tr>
                             <tr>
                                 <td><strong>Fatiga Térmica Crítica</strong></td>
-                                <td>Altos gradientes de temperatura constantes entre el núcleo activo (&gt;>1200 K) y los radiadores expuestos al vacío.</td>
+                                <td>Altos gradientes de temperatura constantes entre el núcleo activo (&gt;1200 K) y los radiadores expuestos al vacío.</td>
                                 <td>Conductos de aleaciones refractarias de Tántalo/Renio dotados de juntas de dilatación flexibles.</td>
                             </tr>
                             <tr>
