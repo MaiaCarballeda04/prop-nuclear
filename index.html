@@ -64,7 +64,6 @@
             margin-top: 0.4rem;
         }
 
-        /* Bandera Argentina Aeroespacial */
         .flag-container {
             display: flex;
             flex-direction: column;
@@ -90,7 +89,6 @@
             border-radius: 50%;
         }
 
-        /* Contenedor Principal en Pantalla Dividida */
         .main-container {
             display: flex;
             flex: 1;
@@ -98,7 +96,6 @@
             position: relative;
         }
 
-        /* COLUMNA IZQUIERDA: Panel de Mandos Fijo */
         .sidebar {
             width: 380px;
             background-color: var(--bg-card);
@@ -110,7 +107,6 @@
             overflow-y: auto;
         }
 
-        /* COLUMNA DERECHA: Documentación y Resultados con Scroll */
         .content-area {
             flex: 1;
             display: flex;
@@ -174,7 +170,6 @@
             line-height: 1.3;
         }
 
-        /* Sistema de Pestañas */
         .tabs-nav {
             display: flex;
             background-color: var(--bg-card);
@@ -221,7 +216,6 @@
             display: block;
         }
 
-        /* Tarjetas de Diagnóstico Físico */
         .grid-outputs {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -251,12 +245,11 @@
         }
 
         .output-card .unit {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: var(--text-muted);
             margin-left: 0.2rem;
         }
 
-        /* Contenedor del Canvas 3D */
         .viewer-container {
             background-color: var(--bg-card);
             border: 1px solid var(--border);
@@ -310,7 +303,6 @@
             background: rgba(0, 240, 255, 0.2);
         }
 
-        /* Bloques de Estado y Validaciones */
         .status-box {
             padding: 1rem;
             border-radius: 6px;
@@ -340,38 +332,12 @@
             color: var(--danger);
         }
 
-        /* Contenido Técnico Estilizado */
         .tech-block {
             background-color: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: 8px;
             padding: 1.5rem;
             margin-bottom: 1.5rem;
-        }
-        .status-box {
-            padding: 1rem;
-            border-radius: 6px;
-            margin-bottom: 1.5rem;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.95rem;
-        }
-        .status-box.valid {
-            background-color: rgba(16, 185, 129, 0.15);
-            border: 1px solid var(--success);
-            color: var(--success);
-        }
-        .status-box.warning {
-            background-color: rgba(245, 158, 11, 0.15);
-            border: 1px solid var(--warning);
-            color: var(--warning);
-        }
-        .status-box.invalid {
-            background-color: rgba(239, 68, 68, 0.15);
-            border: 1px solid var(--danger);
-            color: var(--danger);
         }
 
         .tech-block h3 {
@@ -413,6 +379,7 @@
             margin-bottom: 0.5rem;
             line-height: 1.5;
         }
+
         .integration-diagram {
             display: flex;
             flex-wrap: wrap;
@@ -425,6 +392,7 @@
             border: 1px solid var(--border);
             margin: 1.5rem 0;
         }
+
         .diagram-node {
             background: var(--bg-card);
             border: 1px solid var(--border);
@@ -439,6 +407,7 @@
             color: white;
             box-shadow: 0 2px 8px rgba(0,0,0,0.4);
         }
+
         .diagram-node span {
             display: block;
             font-size: 0.75rem;
@@ -446,31 +415,37 @@
             font-weight: normal;
             margin-top: 0.2rem;
         }
+
         .diagram-arrow {
             color: var(--secondary);
             font-weight: bold;
             font-size: 1.2rem;
         }
+
         .tech-table {
             width: 100%;
             border-collapse: collapse;
             margin: 1rem 0;
             font-size: 0.9rem;
         }
+
         .tech-table th, .tech-table td {
             border: 1px solid var(--border);
             padding: 0.6rem 0.8rem;
             text-align: left;
         }
+
         .tech-table th {
             background-color: rgba(0, 240, 255, 0.05);
             color: var(--primary);
             text-transform: uppercase;
             font-size: 0.8rem;
         }
+
         .tech-table tr:nth-child(even) {
             background-color: rgba(255,255,255,0.01);
         }
+
         .grid-scalability {
             display: flex;
             flex-wrap: wrap;
@@ -478,6 +453,7 @@
             margin-top: 1rem;
             width: 100%;
         }
+
         .scale-card {
             background: rgba(11, 15, 25, 0.5);
             border: 1px solid var(--border);
@@ -487,6 +463,7 @@
             flex: 1 1 calc(33.333% - 1rem);
             min-width: 150px;
         }
+
         .scale-card h4 {
             color: white;
             font-size: 0.95rem;
@@ -494,6 +471,7 @@
             display: flex;
             justify-content: space-between;
         }
+
         .scale-card p {
             font-size: 0.85rem;
             color: var(--text-muted);
@@ -501,7 +479,6 @@
             line-height: 1.4;
         }
 
-        /* Expresiones Matemáticas Estilizadas (Simulación de LaTeX Profesional) */
         .equation-container {
             background-color: rgba(11, 15, 25, 0.9);
             border-radius: 6px;
@@ -536,7 +513,6 @@
             padding-top: 0.4rem;
         }
 
-        /* Bloque de Enlaces y Bibliografía */
         .source-box {
             background-color: rgba(0, 240, 255, 0.02);
             border: 1px dashed var(--border);
@@ -544,12 +520,14 @@
             padding: 1rem;
             margin-top: 1rem;
         }
+
         .source-box h4 {
             font-size: 0.9rem;
             color: var(--primary);
             margin-bottom: 0.5rem;
             text-transform: uppercase;
         }
+
         .source-link {
             display: block;
             font-size: 0.85rem;
@@ -558,6 +536,7 @@
             margin-bottom: 0.3rem;
             font-family: monospace;
         }
+
         .source-link:hover {
             text-decoration: underline;
             color: var(--primary);
@@ -575,7 +554,7 @@
     <header>
         <div class="header-text">
             <h1>Arquitectura <span>NEP</span> Estructural</h1>
-            <p>Simulador conceptual de propulsión nuclear eléctrica para misiones científicas de espacio profundo</p>
+            <p>Simulador conceptual de Propulsión Nuclear Eléctrica (NEP) para misiones científicas de espacio profundo</p>
         </div>
         <div class="flag-container" title="Desarrollo Tecnológico de Matriz Nacional Argentina">
             <div class="flag-stripe flag-blue"></div>
@@ -599,21 +578,21 @@
             </div>
 
             <div class="control-group">
-                <label for="voltage">Voltaje de Aceleración (V) <span id="voltage-val" class="value">2500 V</span></label>
+                <label for="voltage">Voltaje de Aceleración (V) <span id="voltage-val" class="value">2500 Voltios</span></label>
                 <input type="range" id="voltage" min="1000" max="5000" step="100" value="2500" oninput="calculatePhysics()">
-                <div class="param-note">Afecta la diferencia de potencial electrostático en las rejillas iónicas.</div>
+                <div class="param-note">Afecta la diferencia de potencial electrostático en Voltios aplicados a las rejillas iónicas.</div>
             </div>
 
             <div class="control-group">
-                <label for="power">Potencia Técnico del Reactor (Q<sub>th</sub>) <span id="power-val" class="value">500 kW</span></label>
+                <label for="power">Potencia Térmica del Reactor (Q<sub>th</sub>) <span id="power-val" class="value">500 kWt</span></label>
                 <input type="range" id="power" min="100" max="1500" step="50" value="500" oninput="calculatePhysics()">
-                <div class="param-note">Calor térmico total bruto generado por las barras de combustible del núcleo de fisión.</div>
+                <div class="param-note">Calor térmico bruto generado por el núcleo de fisión en kilo Watts térmicos (kWt).</div>
             </div>
 
             <div class="control-group">
                 <label for="area">Área Total de Radiadores (A) <span id="area-val" class="value">120 m²</span></label>
                 <input type="range" id="area" min="40" max="300" step="10" value="120" oninput="calculatePhysics()">
-                <div class="param-note">Superficie neta disponible para emitir radiación infrarroja de desecho al vacío.</div>
+                <div class="param-note">Superficie neta en metros cuadrados (m²) para emitir radiación infrarroja de desecho al vacío.</div>
             </div>
         </aside>
 
@@ -633,7 +612,7 @@
                     <div class="output-card">
                         <div class="label">Velocidad de Escape (v<sub>e</sub>)</div>
                         <div id="out-ve" class="value">0.0</div>
-                        <div class="unit">km/s</div>
+                        <div class="unit">(km/s)</div>
                     </div>
                     <div class="output-card">
                         <div class="label">Impulso Específico (I<sub>sp</sub>)</div>
@@ -643,12 +622,12 @@
                     <div class="output-card">
                         <div class="label">Potencia Eléctrica (P<sub>e</sub>)</div>
                         <div id="out-pe" class="value">0</div>
-                        <div class="unit">kWe</div>
+                        <div class="unit">(kWe)</div>
                     </div>
                     <div class="output-card">
                         <div class="label">Temperatura de Radiadores</div>
                         <div id="out-temp" class="value">0.0</div>
-                        <div class="unit">°C</div>
+                        <div class="unit">(°C)</div>
                     </div>
                 </div>
 
@@ -658,25 +637,25 @@
                         <button class="btn-reset" onclick="resetView()">Centrar Vista</button>
                     </div>
                     <div id="canvas-3d-target" class="canvas-wrapper"></div>
-                    <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.5rem; text-align: right;">💡 Mantén presionado el clic izquierdo y arrastra para rotar la perspectiva en 360°.</p>
+                    <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.5rem; text-align: right;"> Mantén presionado el clic izquierdo y arrastra para rotar la perspectiva en 360°.</p>
                 </div>
 
                 <div class="tech-block">
-                    <h3>Diagrama de Integración y Flujo del Sistema </h3>
+                    <h3>Diagrama de Integración y Flujo del Sistema</h3>
                     <p>A continuación se detalla la línea de acoplamiento de la arquitectura de la nave espacial. Este flujo describe visualmente la transición desde la generación de calor bruto hasta la transformación en empuje iónico neto:</p>
                     <div class="integration-diagram">
-                        <div class="diagram-node">Reactor Nuclear<span>Núcleo Térmico (Q<sub>th</sub>)</span></div>
+                        <div class="diagram-node">Reactor Nuclear<span>Núcleo Térmico en kilo Watts térmicos (Q<sub>th</sub>)</span></div>
                         <div class="diagram-arrow">➔</div>
-                        <div class="diagram-node">Conversión Brayton<span>Turbina de Gas He-Xe</span></div>
+                        <div class="diagram-node">Conversión Brayton<span>Turbina de Gas Helio-Xenón (He-Xe)</span></div>
                         <div class="diagram-arrow">➔</div>
-                        <div class="diagram-node">Distribución Eléctrica<span>Alternador Central (P<sub>e</sub>)</span></div>
+                        <div class="diagram-node">Distribución Eléctrica<span>Alternador Central en kilo Watts eléctricos (P<sub>e</sub>)</span></div>
                         <div class="diagram-arrow">➔</div>
-                        <div class="diagram-node">Motores Iónicos<span>Aceleración Electrostática</span></div>
+                        <div class="diagram-node">Motores Iónicos<span>Aceleración Electrostática en Voltios (V)</span></div>
                         <div class="diagram-arrow">➔</div>
-                        <div class="diagram-node">Radiadores Ténd.<span>Disipación Excedente</span></div>
+                        <div class="diagram-node">Radiadores Térmicos<span>Disipación Excedente en metros cuadrados (m²)</span></div>
                     </div>
                     <p style="margin-top: 0.5rem; font-size: 0.85rem; color: var(--text-muted);">
-                        Nota: El flujo visual permite al lector identificar cómo el calor excedente no convertido por el bloque Brayton es derivado de forma directa hacia el lazo secundario de disipación por radiación infrarroja al vacío.
+                        Nota: El flujo visual permite identificar cómo el calor excedente no convertido por el bloque Brayton es derivado directamente hacia el lazo secundario de disipación por radiación infrarroja al vacío.
                     </p>
                 </div>
                 
@@ -686,17 +665,17 @@
                     
                     <div class="equation-container">
                         <div class="equation-box">v<sub>e</sub> = √ ( <span class="math-op">(</span>2 · q · V<span class="math-op">)</span> / m )</div>
-                        <div class="eq-expl"><strong>Velocidad Cinemática de Escape:</strong> Deducción de la energía cinética de un ion monovalente accelerated. Donde <em>q</em> representa la carga elemental del electrón (1.602 × 10<sup>-19</sup> C), <em>V</em> el voltaje aplicado y <em>m</em> la masa atómica real del elemento químico.</div>
+                        <div class="eq-expl"><strong>Velocidad Cinemática de Escape (v<sub>e</sub>):</strong> Deducción de la energía cinética de un ion monovalente acelerado. Donde <em>q</em> representa la carga elemental del electrón (1.602 × 10<sup>-19</sup> Coulombs), <em>V</em> el voltaje aplicado en Voltios y <em>m</em> la masa atómica real del elemento químico en kilogramos.</div>
                     </div>
 
                     <div class="equation-container">
                         <div class="equation-box">P<sub>e</sub> = Q<sub>th</sub> · η<sub>brayton</sub></div>
-                        <div class="eq-expl"><strong>Conversión de Energía Útil:</strong> Potencia eléctrica neta inyectada a la Unidad de Procesamiento de Potencia (PPU) asumiendo una eficiencia de ciclo cerrado dinámico de η<sub>brayton</sub> = 0.35.</div>
+                        <div class="eq-expl"><strong>Conversión de Energía Útil (P<sub>e</sub>):</strong> Potencia eléctrica neta en kilo Watts eléctricos (kWe) inyectada a la Unidad de Procesamiento de Potencia (PPU) asumiendo una eficiencia de ciclo cerrado dinámico de η<sub>brayton</sub> = 0.35 (35%).</div>
                     </div>
 
                     <div class="equation-container">
                         <div class="equation-box">T = [ Q<sub>desecho</sub> / (ε · σ · A) ]<sup>(1/4)</sup></div>
-                        <div class="eq-expl"><strong>Equilibrio Térmico Estacionario (Stefan-Boltzmann):</strong> Temperatura absoluta en Kelvin requerida para radiar al espacio el calor sobrante (Q<sub>desecho</sub> = Q<sub>th</sub> - P<sub>e</sub>). Se calcula con una emisividad de superficie ε = 0.90 y la constante de Stefan σ = 5.67 × 10<sup>-8</sup> W/m²K⁴.</div>
+                        <div class="eq-expl"><strong>Equilibrio Térmico Estacionario (Ley de Stefan-Boltzmann):</strong> Temperatura absoluta en Kelvin (K) requerida para radiar al espacio el calor sobrante (Q<sub>desecho</sub> = Q<sub>th</sub> - P<sub>e</sub> en Watts). Se calcula con una emisividad de superficie ε = 0.90 y la constante de Stefan-Boltzmann σ = 5.67 × 10<sup>-8</sup> W/m²K⁴ sobre el área A en metros cuadrados (m²).</div>
                     </div>
                 </div>
             </div>
@@ -706,23 +685,23 @@
 
                 <div class="tech-block">
                     <h3>Perfil de Misión Científica y Destino Concreto <span class="badge">Caso de estudio</span></h3>
-                    <p>Para dotar esta arquitectura a un propósito científico sólido, el modelo que tomé como referencia una misión automatizada de larga duración hacia el Cinturón de Asteroides (Objetivo: 16 Psyche) o las lunas heladas de Júpiter (Europa/Ganímedes).</p>
+                    <p>Para dotar esta arquitectura a un propósito científico sólido, el modelo toma como referencia una misión automatizada de larga duración hacia el Cinturón de Asteroides (Objetivo: 16 Psyche) o las lunas heladas de Júpiter (Europa/Ganímedes).</p>
                     <ul>
                         <li><strong>Objetivo Científico:</strong> Mapeo de composición metalúrgica profunda y caracterización geomorfológica mediante espectrometría de masas, altimetría láser y radares de penetración de subsuelo.</li>
                         <li><strong>Duración Estimada:</strong> Ventana de tránsito directo de 2.4 años hacia el Cinturón Principal con empuje constante (ahorro del 45% del tiempo de viaje en comparación con trayectorias químicas clásicas).</li>
-                        <li><strong>Justificación Física (NEP vs Química/Solar):</strong> Al alejarse de la Tierra, la irradiancia solar decae críticamente bajo la ley del cuadrado inverso (1/r²). Esto causa que los sistemas fotovoltaicos (SEP) exijan paneles de proporciones kilométricas inviables para el lanzamiento. Asimismo, la propulsión química tradicional penaliza la masa útil debido a la inmensa carga muerta de combustible requerida. La densidad energética del reactor de fisión asegura potencia eléctrica masiva ininterrumpida en el espacio profundo.</li>
+                        <li><strong>Justificación Física (NEP vs Química/Solar):</strong> Al alejarse de la Tierra, la irradiancia solar decae críticamente bajo la ley del cuadrado inverso (1/r²). Esto causa que los sistemas Fotovoltaicos Solares Eléctricos (SEP) exijan paneles de proporciones kilométricas inviables para el lanzamiento. Asimismo, la propulsión química tradicional penaliza la masa útil debido a la inmensa carga muerta de combustible requerida. La densidad energética del reactor de fisión asegura potencia eléctrica masiva ininterrumpida en el espacio profundo.</li>
                     </ul>
                 </div>
                 
                 <div class="tech-block">
                     <h3>1. Comparativa de Sistemas y Envolventes Operativas</h3>
-                    <p>La propulsión espacial se divide en tres grandes categorías según su densidad de energía y mecanismos de empuje. La propulsión química tradicional genera un empuje elevado pero posee un Impulso Específico muy bajo (I<sub>sp</sub> ≈ 450 s), lo que satura la masa de lanzamiento con propelente muerto. Los sistemas solares eléctricos (SEP) aumentan drásticamente el I<sub>sp</sub>, pero su viabilidad disminuye exponencialmente con la distancia debido a la atenuación solar (1/r²), limitando críticamente el suministro de energía en regiones exteriores.</p>
+                    <p>La propulsión espacial se divide en tres grandes categorías según su densidad de energía y mecanismos de empuje. La propulsión química tradicional genera un empuje elevado pero posee un Impulso Específico muy bajo (I<sub>sp</sub> ≈ 450 segundos), lo que satura la masa de lanzamiento con propelente muerto. Los sistemas Solares Eléctricos (SEP) aumentan drásticamente el I<sub>sp</sub>, pero su viabilidad disminuye exponencialmente con la distancia debido a la atenuación solar (1/r²), limitando críticamente el suministro de energía en regiones exteriores.</p>
                     <p>La <strong>Propulsión Nuclear Eléctrica (NEP)</strong> resuelve esta limitación integrando un reactor de fisión de alta temperatura independiente del flujo solar, operando como una planta de energía constante en el espacio profundo.</p>
                 </div>
                 
                 <div class="tech-block">
-                    <h3>2. Justificación Técnica y Matriz de Riesgos Críticos </h3>
-                    <p>El balance energético del sistema se fundamenta en un acoplamiento riguroso de potencia. Del total de calor bruto generado (500 kW<sub>t</sub>), el Ciclo Brayton Cerrado opera con una eficiencia óptima estimada del 35%, transformándola en 175 kW<sub>e</sub> de potencia eléctrica útil para los propulsores iónicos, derivando el remanente hacia el lazo de rechazo térmico. No obstante, la viabilidad estructural exige el análisis y mitigación de fallas críticas de materiales:</p>
+                    <h3>2. Justificación Técnica y Matriz de Riesgos Críticos</h3>
+                    <p>El balance energético del sistema se fundamenta en un acoplamiento riguroso de potencia. Del total de calor bruto generado (500 kilo Watts térmicos / kWt), el Ciclo Brayton Cerrado opera con una eficiencia óptima estimada del 35%, transformándola en 175 kilo Watts eléctricos (kWe) de potencia eléctrica útil para los propulsores iónicos, derivando el remanente hacia el lazo de rechazo térmico. No obstante, la viabilidad estructural exige el análisis y mitigación de fallas críticas de materiales:</p>
                     <table class="tech-table">
                         <thead>
                             <tr>
@@ -739,45 +718,45 @@
                             </tr>
                             <tr>
                                 <td><strong>Fatiga Térmica Crítica</strong></td>
-                                <td>Altos gradientes de temperatura constantes entre el núcleo activo (&gt;1200 K) y los radiadores expuestos al vacío.</td>
+                                <td>Altos gradientes de temperatura constantes entre el núcleo activo (&gt;1200 Kelvin) y los radiadores expuestos al vacío.</td>
                                 <td>Conductos de aleaciones refractarias de Tántalo/Renio dotados de juntas de dilatación flexibles.</td>
                             </tr>
                             <tr>
                                 <td><strong>Blindaje Radiológico Pesado</strong></td>
                                 <td>El flujo de neutrones rápidos y rayos gamma emitido degrada los semiconductores de la aviónica central.</td>
-                                <td>Configuración de un <strong>Blindaje de Sombra Cónico</strong> optimizado en capas de Hidruro de Litio (LiH) y Tungsteno.</td>
+                                <td>Configuración de un <strong>Blindaje de Sombra Cónico (Shadow Shield)</strong> optimizado en capas de Hidruro de Litio (LiH) y Tungsteno.</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
                 
                 <div class="tech-block">
-                    <h3>3. Estrategia de Escalabilidad Modular del Bloque Motor </h3>
+                    <h3>3. Estrategia de Escalabilidad Modular del Bloque Motor</h3>
                     <p>La planta motriz ha sido diseñada bajo un principio modular estándar (Power Block). Este bloque puede ser adaptado o apilado para cubrir un amplio espectro de misiones sin necesidad de rediseñar los subsistemas núcleo:</p>
                     <div class="grid-scalability">
                         <div class="scale-card">
                             <h4>Misiones Pequeñas Cooperativas <span>(100 kWe)</span></h4>
-                            <p>Configuración compacta optimizada para micro-reactores. Destinada a orbitadores científicos ágiles y sondas de exploración en trayectorias directas a cometas o asteroides troyanos.</p>
+                            <p>Configuración compacta en 100 kilo Watts eléctricos optimizada para micro-reactores. Destinada a orbitadores científicos ágiles y sondas de exploración en trayectorias directas a cometas o asteroides troyanos.</p>
                         </div>
                         <div class="scale-card">
                             <h4>Transporte Logístico Pesado <span>(1 MWe)</span></h4>
-                            <p>Remolcadores espaciales pesados (Space Tugs) diseñados para transferir de forma automatizada infraestructuras, suministros y módulos habitables entre órbitas LEO, cislunares y marcianas.</p>
+                            <p>Remolcadores espaciales pesados (Space Tugs) en 1 Mega Watt eléctrico diseñados para transferir de forma automatizada infraestructuras, suministros y módulos habitables entre órbitas LEO, cislunares y marcianas.</p>
                         </div>
                         
                         <div class="scale-card">
                             <h4>Constelaciones en Órbitas LEO <span>(Megaconstelaciones)</span></h4>
-                            <p>Módulos de energía integrados para satélites masivos de telecomunicaciones o defensa que exijan maniobrabilidad orbital extrema, cambios continuos de inclinación y evasión autónoma de basura espacial.</p>
+                            <p>Módulos de energía integrados para satélites masivos de telecomunicaciones o defensa en Órbita Terrestre Baja (LEO) que exijan maniobrabilidad orbital extrema, cambios continuos de inclinación y evasión autónoma de basura espacial.</p>
                         </div>
                     </div>
                 </div>
                 
                 <div class="tech-block">
-                    <h3>4. Restricciones Regulatorias y Marco Jurídico Internacional </h3>
+                    <h3>4. Restricciones Regulatorias y Marco Jurídico Internacional</h3>
                     <p>El despliegue operacional de fuentes de energía nucleares en el espacio ultraterrestre está rígidamente regulado por el derecho internacional. Esta arquitectura se encuadra estrictamente bajo los lineamientos del "Tratado del Espacio Ultraterrestre de 1967" y los Principios de las Naciones Unidas Relativos a la Utilización de Fuentes de Energía Nuclear en el Espacio (1992).</p>
                     <p>Para mitigar cualquier tipo de riesgo radiológico sobre la biosfera, el diseño prohíbe físicamente la activación del reactor en la atmósfera terrestre o en órbitas bajas propensas al decaimiento rápido. El sistema permanece inerte durante el lanzamiento convencional y solo se activa una vez alcanzada una Órbita Segura Permanente (Safe Orbit), definida matemáticamente como aquella altitud donde el frenado aerodinámico residual es tan bajo que el tiempo de reentrada excede los miles de años, permitiendo el decaimiento natural de la actividad del núcleo.</p>
-                    <p>este proyecto bajo el tratado del espacio ultraterrestre y los principios de la ONU el reactor permanece inerte durante el lanzamiento y solo se activa en órbita segura permanente</p>
-                        <h4>Fuente de Referencia:</h4>
-                        <a href="https://www.unoosa.org/pdf/publications/STSPACE11S.pdf" class="source-link" target="_blank">→ Tratados y principios de las Naciones Unidas sobre el espacio ultraterrestre</a>
+                    <p>Bajo el tratado del espacio ultraterrestre y los principios de la ONU, el reactor permanece inerte durante el lanzamiento y solo se activa en órbita segura permanente.</p>
+                    <h4>Fuente de Referencia:</h4>
+                    <a href="https://www.unoosa.org/pdf/publications/STSPACE11S.pdf" class="source-link" target="_blank">→ Tratados y principios de las Naciones Unidas sobre el espacio ultraterrestre</a>
                 </div>
                 
                 <div class="tech-block">
@@ -798,76 +777,80 @@
 
     <script>
         // Constantes Físicas Exactas
-        const q = 1.602176634e-19; 
-        const NA = 6.02214076e23;  
+        const q = 1.602176634e-19; // Carga elemental en Coulombs
+        const NA = 6.02214076e23;  // Número de Avogadro
 
-        // Masas atómicas reales de los elementos (en kg)
+        // masas atomicas reales de los elementos (en kg)
         const masses = {
             krypton: 83.798 / (NA * 1000), 
             xenon: 131.293 / (NA * 1000)   
         };
 
-        // Variables del Entorno Global 3D
-        let scene, camera, renderer, controls, rocketGroup, starfield, ionBeamMesh;
+        // variables del entorno 3d
+        let scene, camera, renderer, controls, spaceshipGroup, starfield, ionBeamMesh, radiatorPanels = [];
 
         function init3DEnvironment() {
             const container = document.getElementById('canvas-3d-target');
             const w = container.clientWidth;
             const h = container.clientHeight;
 
-            // 1. Creación de la escena
+ 
             scene = new THREE.Scene();
             scene.background = new THREE.Color(0x060913);
 
-            // 2. Ajuste focal de cámara para capturar la silueta del Ares I
+            // camara ajustada para el modelo estructural completo
             camera = new THREE.PerspectiveCamera(40, w / h, 0.1, 1000);
-            camera.position.set(0, 3, 18);
+            camera.position.set(0, 2, 22);
 
-            // 3. Renderizador WebGL Avanzado
+            // renderizador WebGL 
             renderer = new THREE.WebGLRenderer({ antialias: true });
             renderer.setSize(w, h);
             renderer.setPixelRatio(window.devicePixelRatio);
             container.appendChild(renderer.domElement);
 
-            // 4. Configuración de Controles Orbitales
+            // configuración de controles orbitales
             controls = new THREE.OrbitControls(camera, renderer.domElement);
             controls.enableDamping = true;
             controls.dampingFactor = 0.05;
-            controls.maxDistance = 35;
-            controls.minDistance = 7;
+            controls.maxDistance = 45;
+            controls.minDistance = 5;
 
-            // 5. Configuración de Iluminación de Órbita Alta
-            const ambientLight = new THREE.AmbientLight(0x555555);
+           
+            const ambientLight = new THREE.AmbientLight(0x666666);
             scene.add(ambientLight);
 
-            const sunLight = new THREE.DirectionalLight(0xffffff, 1.2);
-            sunLight.position.set(12, 18, 10);
+            const sunLight = new THREE.DirectionalLight(0xffffff, 1.3);
+            sunLight.position.set(15, 20, 10);
             scene.add(sunLight);
 
-            const albedoEarthLight = new THREE.DirectionalLight(0x00d2ff, 0.35); // Reflejo azul de la atmósfera
-            albedoEarthLight.position.set(-10, -5, -10);
-            scene.add(albedoEarthLight);
+            const earthReflection = new THREE.DirectionalLight(0x00d2ff, 0.3);
+            earthReflection.position.set(-10, -10, -10);
+            scene.add(earthReflection);
 
-            // 6. Generación del campo estelar
+            // campo estelar de fondo
             generateStarfield();
 
-            // 7. Construcción Matemática Nativa del Cohete (Indestructible sin Red)
-            rocketGroup = new THREE.Group();
-            buildAresIGeometry();
-            scene.add(rocketGroup);
+            // modelo geometrico del nep
+            spaceshipGroup = new THREE.Group();
+            buildNuclearSpacecraftGeometry();
+            scene.add(spaceshipGroup);
 
-            // Listener para cambios de tamaño de pantalla
+            //cambios de tamaño de pantalla
             window.addEventListener('resize', onWindowResize);
 
-            // Inicio del bucle infinito de renderizado
+            // Bucle de animación
             animate();
         }
 
-        function buildAresIGeometry() {
-            // Paleta de Materiales Estructura Aeroespacial (Matte / Metalizados)
-            const matWhiteNasa = new THREE.MeshStandardMaterial({ color: 0xdddddd, roughness: 0.4, metalness: 0.1 });
-            const matDarkMetal = new THREE.MeshStandardMaterial({ color: 0x454950, roughness: 0.5, metalness: 0.7 });
-            const matInterstage = new THREE.MeshStandardMaterial({ color: 0xcccccc, roughness: 0.4, metalness: 0.2 });
+        function buildNuclearSpacecraftGeometry() {
+            radiatorPanels = []; 
+
+            //materiales 
+            const matReactorCore = new THREE.MeshStandardMaterial({ color: 0xff6600, roughness: 0.3, metalness: 0.8 });
+            const matShield = new THREE.MeshStandardMaterial({ color: 0x333333, roughness: 0.6, metalness: 0.9 });
+            const matTruss = new THREE.MeshStandardMaterial({ color: 0x8899a6, roughness: 0.4, metalness: 0.8, wireframe: false });
+            const matRadiator = new THREE.MeshStandardMaterial({ color: 0x111622, roughness: 0.8, metalness: 0.2, side: THREE.DoubleSide });
+            const matBus = new THREE.MeshStandardMaterial({ color: 0x222831, roughness: 0.5, metalness: 0.7 });
             const matIonPlume = new THREE.MeshBasicMaterial({ 
                 color: 0x00f0ff, 
                 transparent: true, 
@@ -875,76 +858,91 @@
                 blending: THREE.AdditiveBlending 
             });
 
-            // --- ETAPA 1: Impulsor de Cohete de Estado Sólido (SRB de 5 segmentos) ---
-            const geomEtapa1 = new THREE.CylinderGeometry(0.26, 0.26, 5.4, 16);
-            const etapa1 = new THREE.Mesh(geomEtapa1, matWhiteNasa);
-            etapa1.position.y = -2.6;
-            rocketGroup.add(etapa1);
+            // reactor nuclear 
+            const geomReactor = new THREE.CylinderGeometry(0.7, 0.7, 2.0, 16);
+            const reactor = new THREE.Mesh(geomReactor, matReactorCore);
+            reactor.position.y = 6.5;
+            spaceshipGroup.add(reactor);
 
-            // Anillos estructurales de segmentación del SRB
-            for (let i = 0; i < 5; i++) {
-                const geomAnillo = new THREE.CylinderGeometry(0.27, 0.27, 0.05, 16);
-                const anillo = new THREE.Mesh(geomAnillo, matDarkMetal);
-                anillo.position.y = -4.8 + (i * 1.1);
-                rocketGroup.add(anillo);
+            // anillos estructurales del nucleo 
+            const geomRing = new THREE.TorusGeometry(0.75, 0.05, 8, 24);
+            const ring1 = new THREE.Mesh(geomRing, matShield);
+            ring1.rotation.x = Math.PI / 2;
+            ring1.position.y = 7.0;
+            spaceshipGroup.add(ring1);
+
+            const ring2 = ring1.clone();
+            ring2.position.y = 6.0;
+            spaceshipGroup.add(ring2);
+
+            // escudo de sombra
+            const geomShield = new THREE.ConeGeometry(1.4, 0.8, 16, 1, true);
+            const shield = new THREE.Mesh(geomShield, matShield);
+            shield.position.y = 5.1;
+            shield.rotation.x = Math.PI; // apunta hacia abajo para proyectar sombra
+            spaceshipGroup.add(shield);
+
+            // mastil central 
+            const geomTrussMain = new THREE.CylinderGeometry(0.12, 0.12, 8.5, 8);
+            const trussMain = new THREE.Mesh(geomTrussMain, matTruss);
+            trussMain.position.y = 0.5;
+            spaceshipGroup.add(trussMain);
+
+            // estructura reticular de la viga
+            for (let i = 0; i < 7; i++) {
+                const geomCross = new THREE.BoxGeometry(1.0, 0.04, 0.04);
+                const cross = new THREE.Mesh(geomCross, matTruss);
+                cross.position.y = 4.0 - (i * 1.2);
+                cross.rotation.y = (i % 2 === 0) ? 0 : Math.PI / 2;
+                spaceshipGroup.add(cross);
             }
 
-            // Tobera de salida del motor inferior
-            const geomTobera = new THREE.CylinderGeometry(0.20, 0.33, 0.5, 12);
-            const tobera = new THREE.Mesh(geomTobera, matDarkMetal);
-            tobera.position.y = -5.55;
-            rocketGroup.add(tobera);
+            // radiadores termicos 
+            const geomRadiator = new THREE.PlaneGeometry(3.5, 6.5);
+            
+            const radiatorLeft = new THREE.Mesh(geomRadiator, matRadiator);
+            radiatorLeft.position.set(-1.85, 0.5, 0);
+            spaceshipGroup.add(radiatorLeft);
+            radiatorPanels.push(radiatorLeft);
 
-            // --- INTERETAPA: Acoplamiento cónico de transición estructural ---
-            const geomInter = new THREE.CylinderGeometry(0.48, 0.26, 0.8, 16);
-            const interetapa = new THREE.Mesh(geomInter, matInterstage);
-            interetapa.position.y = 0.5;
-            rocketGroup.add(interetapa);
+            const radiatorRight = new THREE.Mesh(geomRadiator, matRadiator);
+            radiatorRight.position.set(1.85, 0.5, 0);
+            spaceshipGroup.add(radiatorRight);
+            radiatorPanels.push(radiatorRight);
 
-            // --- ETAPA 2: Tanque de Combustible Líquido de Diámetro Ampliado ---
-            const geomEtapa2 = new THREE.CylinderGeometry(0.48, 0.48, 3.8, 16);
-            const etapa2 = new THREE.Mesh(geomEtapa2, matWhiteNasa);
-            etapa2.position.y = 2.8;
-            rocketGroup.add(etapa2);
+            // propelente
+            const geomBus = new THREE.CylinderGeometry(0.9, 0.9, 1.8, 16);
+            const bus = new THREE.Mesh(geomBus, matBus);
+            bus.position.y = -4.5;
+            spaceshipGroup.add(bus);
 
-            // Anillo de Instrumentación y Aviónica Superior
-            const geomAvionica = new THREE.CylinderGeometry(0.485, 0.485, 0.25, 16);
-            const avionica = new THREE.Mesh(geomAvionica, matDarkMetal);
-            avionica.position.y = 4.6;
-            rocketGroup.add(avionica);
+            // Tanques esféricos de Criptón/Xenón
+            const geomTank = new THREE.SphereGeometry(0.35, 12, 12);
+            const tankMat = new THREE.MeshStandardMaterial({ color: 0xd4af37, roughness: 0.3, metalness: 0.9 }); // Dorado
+            
+            const tank1 = new THREE.Mesh(geomTank, tankMat);
+            tank1.position.set(0.6, -4.3, 0.6);
+            spaceshipGroup.add(tank1);
 
-            // --- CÁPSULA ORION Y CONO ADAPTADOR ---
-            const geomAdaptador = new THREE.CylinderGeometry(0.30, 0.48, 0.5, 16);
-            const adaptador = new THREE.Mesh(geomAdaptador, matWhiteNasa);
-            adaptador.position.y = 4.95;
-            rocketGroup.add(adaptador);
+            const tank2 = new THREE.Mesh(geomTank, tankMat);
+            tank2.position.set(-0.6, -4.3, -0.6);
+            spaceshipGroup.add(tank2);
 
-            // Módulo de Comando Orion (Cónico)
-            const geomOrion = new THREE.CylinderGeometry(0.12, 0.30, 0.45, 16);
-            const orion = new THREE.Mesh(geomOrion, matDarkMetal);
-            orion.position.y = 5.42;
-            rocketGroup.add(orion);
+            // tobera de aceleracion
+            const geomNozzle = new THREE.ConeGeometry(0.5, 0.7, 16);
+            const nozzle = new THREE.Mesh(geomNozzle, matShield);
+            nozzle.position.y = -5.7;
+            spaceshipGroup.add(nozzle);
 
-            // --- LAS (Launch Abort System): Torre de Escape en la cúspide ---
-            const geomTorre = new THREE.CylinderGeometry(0.03, 0.03, 1.1, 8);
-            const torre = new THREE.Mesh(geomTorre, matWhiteNasa);
-            torre.position.y = 6.2;
-            rocketGroup.add(torre);
-
-            const geomPunta = new THREE.ConeGeometry(0.06, 0.25, 8);
-            const punta = new THREE.Mesh(geomPunta, matDarkMetal);
-            punta.position.y = 6.87;
-            rocketGroup.add(punta);
-
-            // --- PLUMA DE PLASMA REACTIVO ADAPTATIVA (Motor Iónico Inferior) ---
-            const geomPlasma = new THREE.ConeGeometry(0.18, 1.6, 12);
+            // Pluma de Plasma Reactiva
+            const geomPlasma = new THREE.ConeGeometry(0.45, 2.5, 16);
             ionBeamMesh = new THREE.Mesh(geomPlasma, matIonPlume);
-            ionBeamMesh.position.y = -6.65;
-            ionBeamMesh.rotation.x = Math.PI; // Invertido hacia abajo
-            rocketGroup.add(ionBeamMesh);
+            ionBeamMesh.position.y = -7.2;
+            ionBeamMesh.rotation.x = Math.PI; // Dirección opuesta
+            spaceshipGroup.add(ionBeamMesh);
 
-            // Desplazar el eje Y global del cohete para que pivote armónicamente en el centro de masa visual
-            rocketGroup.position.y = -0.4;
+            // Ajuste de pivote global del grupo
+            spaceshipGroup.position.y = 0;
         }
 
         function generateStarfield() {
@@ -976,23 +974,23 @@
             const Q_th_kW = parseFloat(document.getElementById('power').value);
             const A = parseFloat(document.getElementById('area').value);
 
-            // Actualización de textos dinámicos en el Panel de Mandos
+
             document.getElementById('voltage-val').innerText = V + " V";
-            document.getElementById('power-val').innerText = Q_th_kW + " kW";
+            document.getElementById('power-val').innerText = Q_th_kW + " kWt";
             document.getElementById('area-val').innerText = A + " m²";
 
-            // 1. Cálculo de Velocidad de Escape e Impulso Específico
+            // calculo de velocidad de escape e impulso especifico
             const m = masses[propellantType];
             const v_e = Math.sqrt((2 * q * V) / m); 
             const v_e_kms = v_e / 1000;             
             const isp = v_e / 9.80665;              
 
-            // 2. Conversión Energética (Ciclo Brayton Cerrado al 35%)
+            // conversión energética (Ciclo Brayton Cerrado al 35%)
             const eta_brayton = 0.35;
             const P_e_kW = Q_th_kW * eta_brayton;
             const Q_disipado_W = (Q_th_kW - P_e_kW) * 1000; 
 
-            // 3. Gestión Térmica (Stefan-Boltzmann)
+            // gestion termica (Stefan-Boltzmann)
             const epsilon = 0.90; 
             const sigma = 5.670374419e-8; 
             
@@ -1000,12 +998,21 @@
             const T_kelvin = Math.pow(T_fourth, 0.25);
             const T_celsius = T_kelvin - 273.15;
 
-            // VINCULACIÓN AL SIMULADOR 3D: Escalar la pluma iónica según el voltaje de rejillas
+            // VINCULACIÓN AL SIMULADOR 3D:
+            // a) Escalar la pluma iónica según el voltaje en Voltios
             if (ionBeamMesh) {
-                const scaleFactor = V / 2500; // 2500V es el punto medio neutro
-                ionBeamMesh.scale.set(1, scaleFactor, 1);
-                // Ajustar la posición relativa de fuga para que no se separe de la tobera
-                ionBeamMesh.position.y = -5.85 - (0.8 * scaleFactor);
+                const scaleFactor = V / 2500; 
+                ionBeamMesh.scale.set(scaleFactor * 0.8, scaleFactor, scaleFactor * 0.8);
+                ionBeamMesh.position.y = -6.0 - (1.2 * scaleFactor);
+            }
+
+            // b) Escalar área (m²)
+            if (radiatorPanels.length === 2) {
+                const areaScale = Math.sqrt(A / 120); // 120 m² 
+                radiatorPanels[0].scale.set(areaScale, areaScale, 1);
+                radiatorPanels[1].scale.set(areaScale, areaScale, 1);
+                radiatorPanels[0].position.x = -1.85 * areaScale;
+                radiatorPanels[1].position.x = 1.85 * areaScale;
             }
 
             // Notas contextuales del elemento seleccionado
@@ -1022,14 +1029,14 @@
             document.getElementById('out-pe').innerText = Math.round(P_e_kW);
             document.getElementById('out-temp').innerText = T_celsius.toFixed(1);
 
-            // Lógica Algorítmica de Alertas Térmicas Dinámicas
+            // Logica de las alertas termicas dinamicas
             const statusBox = document.getElementById('thermal-status');
             if (T_celsius > 350) {
                 statusBox.className = "status-box invalid";
                 statusBox.innerHTML = "<strong>DISEÑO INVIABLE:</strong> La temperatura operativa de los radiadores (" + T_celsius.toFixed(1) + "°C) supera el límite de fatiga térmica de las aleaciones de soporte (350°C). Incremente el área de radiadores o disminuya la potencia térmica.";
             } else if (T_celsius < 40) {
                 statusBox.className = "status-box warning";
-                statusBox.innerHTML = "<strong>ALERTA DE FLUIDO:</strong> La temperatura de balance térmico es baja (" + T_celsius.toFixed(1) + "°C). Existe riesgo latente de congelamiento o transición de fase incompleta en el lazo secundario.";
+                statusBox.innerHTML = "<strong>ALERTA DE PESO MUERTO Y FLUIDO:</strong> La temperatura de balance es muy baja (" + T_celsius.toFixed(1) + "°C). El área de radiadores es excesiva, agregando masa inerte innecesaria a la nave espacial.";
             } else {
                 statusBox.className = "status-box valid";
                 statusBox.innerHTML = "<strong>CONCEPCIÓN TÉRMICA VIABLE:</strong> Equilibrio térmico estacionario estable a " + T_celsius.toFixed(1) + "°C, las tasas de disipación cierran bajo las envolventes operativas de referencia.";
@@ -1037,7 +1044,7 @@
         }
 
         function resetView() {
-            camera.position.set(0, 3, 18);
+            camera.position.set(0, 2, 22);
             controls.target.set(0, 0, 0);
             controls.update();
         }
@@ -1050,7 +1057,6 @@
             renderer.setSize(container.clientWidth, container.clientHeight);
         }
 
-        // Sistema de navegación por pestañas
         function switchTab(event, tabId) {
             const tabs = document.getElementsByClassName('tab-content');
             for (let i = 0; i < tabs.length; i++) {
@@ -1065,22 +1071,18 @@
             document.getElementById(tabId).classList.add('active');
             event.currentTarget.classList.add('active');
 
-            // Forzar actualización del canvas al cambiar de pestaña para evitar desajustes de aspecto
             if(tabId === 'tab-dashboard') {
                 setTimeout(onWindowResize, 20);
             }
         }
 
-        // Bucle de animación (60 FPS estables)
         function animate() {
             requestAnimationFrame(animate);
 
-            // Rotación suave automática sobre el eje vertical del vector
-            if (rocketGroup) {
-                rocketGroup.rotation.y += 0.003;
+            if (spaceshipGroup) {
+                spaceshipGroup.rotation.y += 0.003;
             }
 
-            // Deriva orbital lenta de las estrellas de fondo
             if (starfield) {
                 starfield.rotation.y += 0.00015;
             }
@@ -1092,7 +1094,6 @@
         window.onload = function() {
             init3DEnvironment();
             calculatePhysics();
-            // Disparar redimensión inicial para un ajuste exacto al contenedor
             setTimeout(onWindowResize, 50);
         };
     </script>
